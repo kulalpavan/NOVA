@@ -732,6 +732,322 @@
             color: var(--white);
         }
 
+        /* New Roleplay System Styles */
+        .roleplay-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .roleplay-container h4 {
+            color: var(--primary);
+            font-size: 1.1em;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Scenario Selector */
+        .scenario-selector-box {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .scenario-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .scenario-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scenario-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .scenario-card.selected {
+            background: linear-gradient(135deg, var(--primary) 0%, #764ba2 100%);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .scenario-card.selected h5,
+        .scenario-card.selected p {
+            color: white;
+        }
+
+        .scenario-difficulty {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .scenario-difficulty.easy {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .scenario-difficulty.medium {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .scenario-difficulty.hard {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .scenario-card h5 {
+            color: var(--primary);
+            font-size: 1em;
+            margin: 0.5rem 0;
+        }
+
+        .scenario-card p {
+            color: #666;
+            font-size: 0.9em;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Role Card Selector */
+        .role-card-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .role-card {
+            background-color: var(--light);
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .role-card.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .role-card i {
+            font-size: 2.5em;
+            display: block;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .role-card.selected i {
+            color: white;
+        }
+
+        .role-card h5 {
+            margin: 0.5rem 0;
+            font-size: 1.1em;
+        }
+
+        .role-card p {
+            color: #666;
+            font-size: 0.9em;
+            margin: 0;
+        }
+
+        .role-card.selected p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Dialogue Display */
+        .dialogue-container {
+            background-color: var(--light);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .dialogue-exchange {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .dialogue-line {
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .dialogue-line.pressurer-line {
+            background-color: #ffe5e5;
+            border-left-color: #dc3545;
+        }
+
+        .dialogue-line.target-line {
+            background-color: #e5f3ff;
+            border-left-color: var(--primary);
+            margin-left: 2rem;
+        }
+
+        .dialogue-line.bystander-line {
+            background-color: #e5ffe5;
+            border-left-color: #28a745;
+            margin-left: 1rem;
+        }
+
+        .speaker-label {
+            font-weight: 700;
+            color: #333;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.95em;
+        }
+
+        .speaker-text {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Feedback Box */
+        .feedback-content {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f5e6ff 100%);
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .feedback-message {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .tips-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border: 1px solid var(--light);
+        }
+
+        .tips-box h5 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .tips-box ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .tips-box li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Confidence Rating */
+        .confidence-rating {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .confidence-rating label {
+            display: block;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .rating-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .rating-btn {
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .rating-btn:hover {
+            border-color: var(--primary);
+            background-color: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .rating-btn.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Role Rotation */
+        .role-rotation {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .role-rotation p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .role-rotation strong {
+            color: var(--primary);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d !important;
+            color: white !important;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268 !important;
+        }
+
+        .btn-secondary:disabled {
+            background-color: #28a745 !important;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
         .dialogue-box {
             background-color: var(--white);
             padding: 1.5rem;
@@ -1740,18 +2056,74 @@
             },
             {
                 id: 2,
-                title: 'Coping Strategy Vision Board',
+                title: 'The "No" Scenario Role-Play',
                 points: 50,
-                type: 'creative-photo',
-                description: 'Create a vision board with images, words, and quotes that inspire healthy coping. Take a photo when done!',
+                type: 'roleplay',
+                description: 'Practice refusing unwanted requests! Experience all 3 roles: Pressurer, Target, and Supportive Bystander. Build confidence in saying "no".',
                 steps: [
-                    'Gather magazines, images, or print materials',
-                    'Create your vision board with positive messages',
-                    'Take a photo of your finished board',
-                    'Upload and explain your coping strategies'
+                    'Choose a realistic scenario',
+                    'Select your role (Pressurer, Target, or Bystander)',
+                    'Engage in the dialogue',
+                    'Rate your confidence and get personalized feedback',
+                    'Rotate roles to experience all perspectives'
                 ],
-                icon: 'fas fa-images',
-                prompt: 'Share your inspiring vision board!'
+                icon: 'fas fa-users',
+                scenarios: [
+                    {
+                        id: 's1',
+                        title: 'The Party Pressure',
+                        context: 'A friend is pressuring you to try something at a party.',
+                        pressurer: 'Come on, everyone\'s doing it. Just one time! It\'s not a big deal.',
+                        target: 'I\'m not comfortable with that. I\'ll pass and stick with what I\'m okay with.',
+                        bystander: 'Yeah, it\'s totally okay to say no. Let\'s do something else instead!',
+                        difficulty: 'easy'
+                    },
+                    {
+                        id: 's2',
+                        title: 'The Academic Shortcut',
+                        context: 'A classmate wants you to help them cheat on an assignment.',
+                        pressurer: 'I\'ll fail if you don\'t help. Just let me copy your work, no one will know!',
+                        target: 'I can\'t do that. I care about my integrity, and I want you to learn too.',
+                        bystander: 'Cheating could get you expelled. Let\'s help you study instead!',
+                        difficulty: 'medium'
+                    },
+                    {
+                        id: 's3',
+                        title: 'The Social Media Trap',
+                        context: 'Someone wants you to share embarrassing content about a friend.',
+                        pressurer: 'It\'s just a meme! Everyone\'s sharing it. Don\'t be lame!',
+                        target: 'That would hurt them. I\'m not going to post anything that mocks my friend.',
+                        bystander: 'Actually, that\'s not cool. How would you feel if they did that to you?',
+                        difficulty: 'medium'
+                    },
+                    {
+                        id: 's4',
+                        title: 'The Risky Substance',
+                        context: 'Someone is pressuring you to use drugs or substances.',
+                        pressurer: 'Why not try it? What\'s the worst that could happen? I do it all the time.',
+                        target: 'No. I know the risks, and I\'m protecting my health. That\'s my boundary.',
+                        bystander: 'That takes guts to say no. I respect that decision.',
+                        difficulty: 'hard'
+                    },
+                    {
+                        id: 's5',
+                        title: 'The Loyalty Test',
+                        context: 'A friend wants you to keep a secret that could hurt someone.',
+                        pressurer: 'You said you\'d keep this secret. Friends don\'t tell on each other!',
+                        target: 'I care about you, but I can\'t stay silent if someone\'s being hurt. That\'s not loyalty, that\'s complicity.',
+                        bystander: 'Real friendship means doing what\'s right, even when it\'s hard.',
+                        difficulty: 'hard'
+                    },
+                    {
+                        id: 's6',
+                        title: 'The Boundary Invasion',
+                        context: 'Someone is ignoring your personal boundaries.',
+                        pressurer: 'Why are you being so uptight? I\'m just teasing! Lighten up!',
+                        target: 'I\'ve told you this bothers me. Please respect my boundaries.',
+                        bystander: 'Hey, they said stop. That means stop. Respect goes both ways.',
+                        difficulty: 'medium'
+                    }
+                ]
             },
             {
                 id: 3,
@@ -1833,9 +2205,9 @@
                         return;
                     }
                 } else if (challenge.type === 'roleplay') {
-                    const reflectionText = document.getElementById('reflectionText');
-                    if (!reflectionText || !reflectionText.value.trim()) {
-                        alert('Please write your reflection about the role-play!');
+                    const feedbackText = document.getElementById('roleplayFeedback');
+                    if (!feedbackText || !feedbackText.textContent.includes('Feedback')) {
+                        alert('Please complete the role-play and view your feedback!');
                         return;
                     }
                 } else if (challenge.type === 'comic') {
@@ -2021,41 +2393,77 @@
         }
 
         function renderRoleplayChallenge(challenge, challengeContent, interactiveChallenge) {
-            const scenarios = {
-                'Pressurer': `"Hey, everyone's going to the party tonight. You should come. They have some stuff to try." 
-                    <br><br>Your task: Try to pressure someone to do something risky.`,
-                'Target': `Someone offers you a vape at a party. You want to fit in but you're not sure.
-                    <br><br>Your task: Practice saying no and explaining your decision.`,
-                'Supportive Bystander': `You see a friend being pressured to try drugs. They look uncomfortable.
-                    <br><br>Your task: Intervene and support your friend.`
-            };
-
-            const responses = {
-                'Pressurer': 'I\'d suggest: "Come on, just try it once. It\'s not a big deal. What could go wrong?"',
-                'Target': 'I\'d say: "Thanks, but no thanks. I need to take care of my health. Let\'s do something else instead."',
-                'Supportive Bystander': 'I\'d tell my friend: "You don\'t have to do anything you\'re not comfortable with. Want to get some air with me?"'
-            };
-
-            let selectedRole = null;
+            let currentScenario = null;
+            let currentRole = null;
+            let completedRoles = [];
+            let roleResponses = {};
 
             const html = `
-                <h3>Choose Your Role</h3>
-                <div class="role-selector" id="roleSelector">
-                    ${challenge.roles.map(role => 
-                        `<button class="role-btn" data-role="${role}">${role}</button>`
-                    ).join('')}
-                </div>
-                
-                <div id="scenarioContent" style="display: none;">
-                    <div class="scenario-container">
-                        <div class="scenario-text" id="scenarioText"></div>
-                        <div class="dialogue-box">
-                            <div class="dialogue-speaker">Suggested Response:</div>
-                            <div class="dialogue-text" id="dialogueResponse"></div>
+                <h3>🎭 The "No" Scenario Role-Play</h3>
+                <div class="roleplay-container">
+                    <!-- Scenario Selector -->
+                    <div class="scenario-selector-box" id="scenarioSelector">
+                        <h4>Step 1: Choose a Scenario</h4>
+                        <div class="scenario-list">
+                            ${challenge.scenarios.map(scenario => `
+                                <div class="scenario-card" data-scenario-id="${scenario.id}">
+                                    <div class="scenario-difficulty ${scenario.difficulty}">${scenario.difficulty}</div>
+                                    <h5>${scenario.title}</h5>
+                                    <p>${scenario.context}</p>
+                                </div>
+                            `).join('')}
                         </div>
-                        <div class="reflection-box">
-                            <label>Your Reflection (How did that feel? What did you learn?)</label>
-                            <textarea id="reflectionText" placeholder="Share your thoughts..."></textarea>
+                    </div>
+
+                    <!-- Role Selection -->
+                    <div id="roleSelection" style="display: none;">
+                        <h4>Step 2: Choose Your Role</h4>
+                        <div class="role-card-selector">
+                            <div class="role-card" data-role="Pressurer">
+                                <i class="fas fa-hand-fist"></i>
+                                <h5>Pressurer</h5>
+                                <p>You're trying to convince them to do something risky.</p>
+                            </div>
+                            <div class="role-card" data-role="Target">
+                                <i class="fas fa-shield-alt"></i>
+                                <h5>Target</h5>
+                                <p>You're practicing saying "no" confidently.</p>
+                            </div>
+                            <div class="role-card" data-role="Bystander">
+                                <i class="fas fa-hand-holding-heart"></i>
+                                <h5>Supportive Bystander</h5>
+                                <p>You're backing up the target's boundaries.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dialogue Simulation -->
+                    <div id="dialogueSimulation" style="display: none;">
+                        <h4>Step 3: Experience the Dialogue</h4>
+                        <div class="dialogue-container">
+                            <div class="dialogue-flow" id="dialogueFlow"></div>
+                        </div>
+                        <button class="btn" id="viewFeedbackBtn" style="width: 100%; margin-top: 1.5rem;">💭 View Feedback & Rate Your Confidence</button>
+                    </div>
+
+                    <!-- Feedback & Rating -->
+                    <div id="feedbackBox" style="display: none;">
+                        <h4>Step 4: Reflection & Confidence Rating</h4>
+                        <div class="feedback-content" id="roleplayFeedback"></div>
+                        
+                        <div class="confidence-rating">
+                            <label>How confident did you feel in this role?</label>
+                            <div class="rating-buttons">
+                                <button class="rating-btn" data-rating="1">😟 Not Confident</button>
+                                <button class="rating-btn" data-rating="2">😐 Somewhat</button>
+                                <button class="rating-btn" data-rating="3">😊 Confident</button>
+                                <button class="rating-btn" data-rating="4">💪 Very Confident</button>
+                            </div>
+                        </div>
+
+                        <div class="role-rotation">
+                            <p>Want to try another role? Completed: <strong id="completedRolesList"></strong></p>
+                            <button class="btn btn-secondary" id="rotateRoleBtn" style="width: 100%; margin-top: 1rem;">🔄 Try Another Role</button>
                         </div>
                     </div>
                 </div>
@@ -2065,17 +2473,158 @@
             interactiveChallenge.style.display = 'block';
             interactiveChallenge.innerHTML = html;
 
-            document.querySelectorAll('.role-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    selectedRole = this.getAttribute('data-role');
-                    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('selected'));
-                    this.classList.add('selected');
+            // Setup event listeners after DOM is rendered
+            setupRoleplayEvents();
 
-                    document.getElementById('scenarioText').innerHTML = scenarios[selectedRole];
-                    document.getElementById('dialogueResponse').innerHTML = responses[selectedRole];
-                    document.getElementById('scenarioContent').style.display = 'block';
+            function setupRoleplayEvents() {
+                // Scenario Selection
+                const scenarioCards = document.querySelectorAll('.scenario-card');
+                scenarioCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        const scenarioId = this.getAttribute('data-scenario-id');
+                        currentScenario = challenge.scenarios.find(s => s.id === scenarioId);
+                        
+                        scenarioCards.forEach(c => c.classList.remove('selected'));
+                        this.classList.add('selected');
+                        
+                        document.getElementById('scenarioSelector').style.display = 'none';
+                        document.getElementById('roleSelection').style.display = 'block';
+                    });
                 });
-            });
+
+                // Role Selection
+                const roleCards = document.querySelectorAll('.role-card');
+                roleCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        currentRole = this.getAttribute('data-role');
+                        
+                        roleCards.forEach(c => c.classList.remove('selected'));
+                        this.classList.add('selected');
+                        
+                        displayDialogue();
+                    });
+                });
+
+                // View Feedback Button
+                const feedbackBtn = document.getElementById('viewFeedbackBtn');
+                if (feedbackBtn) {
+                    feedbackBtn.addEventListener('click', function() {
+                        const feedbackBox = document.getElementById('feedbackBox');
+                        const feedbackContent = document.getElementById('roleplayFeedback');
+                        
+                        const feedback = generateFeedback(currentRole, currentScenario);
+                        feedbackContent.innerHTML = feedback;
+                        
+                        document.getElementById('dialogueSimulation').style.display = 'none';
+                        feedbackBox.style.display = 'block';
+                        
+                        if (!completedRoles.includes(currentRole)) {
+                            completedRoles.push(currentRole);
+                        }
+                        updateCompletedRoles();
+                    });
+                }
+
+                // Confidence Rating
+                const ratingBtns = document.querySelectorAll('.rating-btn');
+                ratingBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const rating = this.getAttribute('data-rating');
+                        roleResponses[currentRole] = { scenario: currentScenario.id, rating: rating };
+                        
+                        ratingBtns.forEach(b => b.classList.remove('selected'));
+                        this.classList.add('selected');
+                    });
+                });
+
+                // Rotate Role Button
+                const rotateBtn = document.getElementById('rotateRoleBtn');
+                if (rotateBtn) {
+                    rotateBtn.addEventListener('click', function() {
+                        currentRole = null;
+                        document.getElementById('feedbackBox').style.display = 'none';
+                        document.getElementById('roleSelection').style.display = 'block';
+                        roleCards.forEach(c => c.classList.remove('selected'));
+                        ratingBtns.forEach(b => b.classList.remove('selected'));
+                    });
+                }
+            }
+
+            // Display Dialogue
+            function displayDialogue() {
+                const dialogueFlow = document.getElementById('dialogueFlow');
+                const lines = [
+                    { speaker: 'Pressurer', text: currentScenario.pressurer, class: 'pressurer-line' },
+                    { speaker: 'Target', text: currentScenario.target, class: 'target-line' },
+                    { speaker: 'Bystander', text: currentScenario.bystander, class: 'bystander-line' }
+                ];
+
+                let dialogueHtml = '<div class="dialogue-exchange">';
+                lines.forEach(line => {
+                    dialogueHtml += `<div class="dialogue-line ${line.class}">
+                        <span class="speaker-label">${line.speaker}:</span>
+                        <span class="speaker-text">"${line.text}"</span>
+                    </div>`;
+                });
+                dialogueHtml += '</div>';
+
+                dialogueFlow.innerHTML = dialogueHtml;
+                
+                document.getElementById('roleSelection').style.display = 'none';
+                document.getElementById('dialogueSimulation').style.display = 'block';
+            }
+
+            function updateCompletedRoles() {
+                const rolesList = document.getElementById('completedRolesList');
+                rolesList.textContent = completedRoles.length > 0 ? completedRoles.join(', ') : 'None yet';
+                
+                const allRoles = ['Pressurer', 'Target', 'Bystander'];
+                const remainingRoles = allRoles.filter(r => !completedRoles.includes(r));
+                
+                if (remainingRoles.length === 0) {
+                    const rotateBtn = document.getElementById('rotateRoleBtn');
+                    if (rotateBtn) {
+                        rotateBtn.textContent = '✅ Challenge Complete!';
+                        rotateBtn.disabled = true;
+                    }
+                }
+            }
+
+            function generateFeedback(role, scenario) {
+                const feedbackMap = {
+                    'Pressurer': {
+                        'easy': '✅ <strong>Pressurer Feedback:</strong><br>You tried to persuade them. In real life, people who say "no" clearly are harder to convince. This is why building confidence in your refusals is critical!',
+                        'medium': '⚡ <strong>Pressurer Feedback:</strong><br>You used moderate pressure tactics. This is realistic—real pressure is often subtle and persistent. The Target\'s response showed strength.',
+                        'hard': '🎯 <strong>Pressurer Feedback:</strong><br>You applied significant pressure. In these high-stakes scenarios, saying "no" requires conviction. Notice how the Target stood firm anyway?'
+                    },
+                    'Target': {
+                        'easy': '💪 <strong>Target Feedback:</strong><br>Great job saying no! Your response was clear and direct. You didn\'t over-explain or apologize. This is exactly how to maintain your boundary.',
+                        'medium': '🛡️ <strong>Target Feedback:</strong><br>Good work standing firm! You acknowledged their request but held your boundary. Next time, try not to justify your "no"—it\'s just your boundary.',
+                        'hard': '⭐ <strong>Target Feedback:</strong><br>Excellent! You stayed calm under pressure and used "I statements." Your conviction is your superpower here. Keep practicing!'
+                    },
+                    'Bystander': {
+                        'easy': '🤝 <strong>Bystander Feedback:</strong><br>You supported the Target by redirecting the situation. This kind of active bystanding can prevent peer pressure from escalating.',
+                        'medium': '❤️ <strong>Bystander Feedback:</strong><br>You offered both support and perspective. Good job validating their boundary while offering an alternative. This is powerful peer leadership.',
+                        'hard': '🌟 <strong>Bystander Feedback:</strong><br>You directly challenged the pressure tactic while affirming the Target. This courage can shift group dynamics and protect vulnerable peers.'
+                    }
+                };
+
+                const roleFeedback = feedbackMap[role] || feedbackMap['Target'];
+                const diffFeedback = roleFeedback[scenario.difficulty] || roleFeedback['easy'];
+                
+                const tips = `<div class="tips-box">
+                    <h5>💡 Improvement Tips:</h5>
+                    <ul>
+                        <li><strong>Use "I" statements:</strong> "I feel...", "I need...", "I decided..."</li>
+                        <li><strong>Stay calm:</strong> Emotions under pressure are valid, but clarity helps.</li>
+                        <li><strong>Repeat if needed:</strong> You can say "no" multiple times without explaining.</li>
+                        <li><strong>Offer alternatives:</strong> This shows you're not rejecting them, just the request.</li>
+                        <li><strong>Seek support:</strong> The Bystander role shows how allies can help.</li>
+                    </ul>
+                </div>`;
+
+                return `<div class="feedback-message">${diffFeedback}</div>${tips}`;
+            }
         }
 
         function renderComicChallenge(challenge, challengeContent, interactiveChallenge) {
