@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova - Flip The Pressure</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a237e;
+            --accent: #ff6d00;
+            --light: #e8eaf6;
+            --dark: #0d1338;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --text: #333;
+            --text-light: #666;
+            --white: #fff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: var(--white);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.05"><polygon points="1000,100 1000,0 0,100"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 109, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .problem-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .problem-text {
+            flex: 1;
+        }
+
+        .problem-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .problem-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .split-screen {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+        }
+
+        .split-left, .split-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .split-left {
+            background-color: var(--light);
+            color: var(--text);
+        }
+
+        .split-right {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+
+        .split-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--light);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .step h3 {
+            margin: 1rem 0;
+            color: var(--primary);
+        }
+
+        /* Challenge Section */
+        .challenges {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+
+        .challenge-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .challenge-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .challenge-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary);
+        }
+
+        .challenge-card h3 {
+            color: var(--primary);
+        }
+
+        .points {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        /* Challenge Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 1rem;
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            color: var(--danger);
+            transform: scale(1.1);
+        }
+
+        .challenge-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-details h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .challenge-details p {
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .challenge-steps {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-steps h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .challenge-steps ol {
+            margin-left: 1.5rem;
+        }
+
+        .challenge-steps li {
+            margin-bottom: 0.8rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .challenge-evidence {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-evidence h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .evidence-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .evidence-btn {
+            padding: 1rem;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            background-color: var(--white);
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .evidence-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .evidence-btn.selected {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .challenge-points {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-points-label {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .challenge-points-value {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .modal-footer .btn {
+            flex: 1;
+            text-align: center;
+        }
+
+        .btn-cancel {
+            background-color: var(--text-light);
+        }
+
+        .btn-cancel:hover {
+            background-color: var(--text);
+        }
+
+        .btn-submit:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Interactive Challenge Styles */
+        .timer-container {
+            text-align: center;
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .timer-display {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .timer-label {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .timer-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--primary);
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .timer-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .timer-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .activity-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .activity-option {
+            padding: 1.5rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: var(--white);
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .activity-option:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .activity-option.selected {
+            background-color: var(--accent);
+            color: var(--white);
+            border-color: var(--accent);
+        }
+
+        .activity-option i {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Role-play Scenario */
+        .scenario-container {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .scenario-text {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .role-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-btn {
+            padding: 1rem;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            background-color: var(--white);
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .role-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .role-btn.selected {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .dialogue-box {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .dialogue-speaker {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .dialogue-text {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Comic Creator */
+        .comic-panel-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .comic-panel {
+            border: 2px dashed var(--primary);
+            border-radius: 10px;
+            padding: 1rem;
+            background-color: var(--light);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comic-panel-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .comic-panel-input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .reflection-box {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .reflection-box label {
+            display: block;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .reflection-box textarea {
+            width: 100%;
+            min-height: 80px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        /* Vent Wall Section */
+        .vent-wall {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+
+        .vent-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .vent-post {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .vent-content {
+            margin-bottom: 1rem;
+        }
+
+        .vent-comments-section {
+            margin-top: 1.5rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+
+        .vent-comments-header {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .vent-comment {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .vent-comment-author {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .vent-comment-text {
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .vent-comment-time {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .vent-comment-input {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .vent-comment-input input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .vent-comment-input input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 5px rgba(255, 109, 0, 0.2);
+        }
+
+        .vent-comment-input button {
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .vent-comment-input button:hover {
+            background-color: #e65100;
+            transform: scale(1.05);
+        }
+
+        .new-vent {
+            margin-top: 2rem;
+        }
+
+        .new-vent textarea {
+            width: 100%;
+            height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 1rem;
+            resize: none;
+            margin-bottom: 1rem;
+        }
+
+        /* Myth Fact Section */
+        .myth-fact {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .quiz-options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-option {
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .quiz-option:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .quiz-results {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: var(--light);
+            border-radius: 10px;
+            display: none;
+        }
+
+        .results-bar {
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            margin: 1rem 0;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .myth-bar, .fact-bar {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        .myth-bar {
+            background-color: var(--danger);
+            width: 35%;
+        }
+
+        .fact-bar {
+            background-color: var(--success);
+            width: 65%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .problem-content {
+                flex-direction: column;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .quiz-options {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-people-arrows"></i>
+                    <span>NOVA</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#problem">The Problem</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#challenges">Challenges</a></li>
+                        <li><a href="#" class="btn">Join Now</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Flip The Pressure.</h1>
+                <p>Real challenges, real support. No app store. No escape. Just you and your crew, building real-world strength.</p>
+                <a href="#" class="btn">Join Your Team Now</a>
+                <a href="#how-it-works" class="btn btn-secondary">How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="section-title">
+                <h2>Drowning in digital escapes? So were we.</h2>
+                <p>The world tells you to escape into a screen. We say the real power is right here. Negative peer pressure is real, but what if you could turn it into your greatest strength?</p>
+            </div>
+            <div class="problem-content">
+                <div class="problem-text">
+                    <h3>Welcome to Nova. Your tool for the real world.</h3>
+                    <p>Nova is a lightweight web app that connects your real-world actions with your team. It's about positive peer pressure, safe support, and learning what's really up—in 30 seconds or less.</p>
+                    <p>Instead of fighting peer pressure, we gamify positive peer pressure. Connect real-world actions to team-based rewards and safe peer support.</p>
+                </div>
+                <div class="problem-image">
+                    <div class="split-screen">
+                        <div class="split-left">
+                            <div class="split-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <p>Isolated with screens</p>
+                        </div>
+                        <div class="split-right">
+                            <div class="split-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <p>Connected with peers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>How Nova Works</h2>
+                <p>Three core features designed to build real-world coping skills and positive connections</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>The Challenge Engine</h3>
+                    <p>Complete real-world challenges to earn points for your team and build coping skills.</p>
+                    <a href="#challenges" class="btn">Explore Challenges</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3>The Vent Wall</h3>
+                    <p>A safe, anonymous space to share your stress and receive support from peers.</p>
+                    <a href="#vent-wall" class="btn">See Vent Wall</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Myth/Fact Bursts</h3>
+                    <p>Quick daily quizzes to learn the truth about substances and mental health.</p>
+                    <a href="#myth-fact" class="btn">Try a Quiz</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>Getting Started is Simple</h2>
+                <p>No downloads, no installations. Just scan and go!</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <i class="fas fa-qrcode" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Scan the QR Code</h3>
+                    <p>At your school assembly, scan the QR code to access Junto instantly.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <i class="fas fa-users" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Join Your House Team</h3>
+                    <p>Select your school house team (Red, Blue, Green, or Yellow) to start earning points.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <i class="fas fa-gamepad" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Start Earning Points</h3>
+                    <p>Complete challenges, support peers, and learn facts to help your team win!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges Section -->
+    <section class="challenges" id="challenges">
+        <div class="container">
+            <div class="section-title">
+                <h2>Real-World Challenges</h2>
+                <p>Earn points for your House by completing these real-world missions</p>
+            </div>
+            <div class="challenge-cards">
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>The 15-Min Unplug</h3>
+                    </div>
+                    <p>Log a 15-minute activity without your phone. Draw, walk, talk to a family member. Your brain will thank you.</p>
+                    <div class="points">+25 points</div>
+                </div>
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <h3>The "No" Scenario</h3>
+                    </div>
+                    <p>A 3-person in-app role-play. Be the "pressurer," "target," or "supportive bystander" to practice saying no.</p>
+                    <div class="points">+50 points</div>
+                </div>
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Creative Outlet</h3>
+                    </div>
+                    <p>Use our 3-panel comic creator to show a moment of stress and a positive response.</p>
+                    <div class="points">+30 points</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vent Wall Section -->
+    <section class="vent-wall" id="vent-wall">
+        <div class="container">
+            <div class="section-title">
+                <h2>The Vent Wall</h2>
+                <p>A safe space to share and support. No text replies, just empathy.</p>
+            </div>
+            <div class="vent-container">
+                <div class="vent-post">
+                    <div class="vent-content">
+                        <p>Feeling overwhelmed with exams and everyone seems to be handling it better than me.</p>
+                    </div>
+                    <div class="vent-comments-section">
+                        <div class="vent-comments-header">Comments (2)</div>
+                        <div class="vent-comment">
+                            <div class="vent-comment-author">Anonymous</div>
+                            <div class="vent-comment-text">You're definitely not alone. Many of us feel the same way.</div>
+                            <div class="vent-comment-time">2 hours ago</div>
+                        </div>
+                        <div class="vent-comment">
+                            <div class="vent-comment-author">Peer Supporter</div>
+                            <div class="vent-comment-text">Have you tried breaking tasks into smaller chunks? It really helps!</div>
+                            <div class="vent-comment-time">1 hour ago</div>
+                        </div>
+                        <div class="vent-comment-input">
+                            <input type="text" class="comment-input" placeholder="Write a supportive comment...">
+                            <button class="add-comment-btn"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="vent-post">
+                    <div class="vent-content">
+                        <p>Someone offered me a vape today and I said no but it was really hard.</p>
+                    </div>
+                    <div class="vent-comments-section">
+                        <div class="vent-comments-header">Comments (3)</div>
+                        <div class="vent-comment">
+                            <div class="vent-comment-author">Proud Supporter</div>
+                            <div class="vent-comment-text">That's amazing! Saying no is so hard. You should be proud of yourself!</div>
+                            <div class="vent-comment-time">3 hours ago</div>
+                        </div>
+                        <div class="vent-comment">
+                            <div class="vent-comment-author">Anonymous</div>
+                            <div class="vent-comment-text">Me too! It gets easier each time you say no.</div>
+                            <div class="vent-comment-time">2 hours ago</div>
+                        </div>
+                        <div class="vent-comment">
+                            <div class="vent-comment-author">Health Mentor</div>
+                            <div class="vent-comment-text">Remember: you're in control. Every time you say no, you're making the healthier choice for yourself.</div>
+                            <div class="vent-comment-time">1 hour ago</div>
+                        </div>
+                        <div class="vent-comment-input">
+                            <input type="text" class="comment-input" placeholder="Write a supportive comment...">
+                            <button class="add-comment-btn"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="new-vent">
+                    <h3>Share your thoughts (anonymously)</h3>
+                    <textarea placeholder="What's on your mind?"></textarea>
+                    <button class="btn">Post to Vent Wall</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Myth/Fact Section -->
+    <section class="myth-fact" id="myth-fact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Myth/Fact Bursts</h2>
+                <p>Get smarter in 30 seconds with our daily quizzes</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-question" id="quiz-question">
+                    MYTH OR FACT: Vaping is just harmless water vapor.
+                </div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-answer="myth">MYTH</div>
+                    <div class="quiz-option" data-answer="fact">FACT</div>
+                </div>
+                <div class="quiz-results" id="quiz-results">
+                    <h3>Class Results</h3>
+                    <div class="results-bar">
+                        <div class="myth-bar">35% MYTH</div>
+                        <div class="fact-bar">65% FACT</div>
+                    </div>
+                    <p><strong>Correct Answer: MYTH</strong></p>
+                    <p>Vaping aerosol is not harmless water vapor. It contains harmful chemicals and ultrafine particles that can be inhaled deep into the lungs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenge Modal -->
+    <div id="challengeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Challenge Title</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            
+            <!-- Challenge Content Container -->
+            <div id="challengeContent">
+                <div class="challenge-details">
+                    <h3>About This Challenge</h3>
+                    <p id="modalDescription">Challenge description goes here</p>
+                </div>
+
+                <div class="challenge-steps">
+                    <h4><i class="fas fa-list-ol"></i> How to Complete</h4>
+                    <ol id="modalSteps">
+                        <li>Step 1</li>
+                        <li>Step 2</li>
+                    </ol>
+                </div>
+
+                <div class="challenge-evidence">
+                    <h4><i class="fas fa-camera"></i> How did you complete this?</h4>
+                    <div class="evidence-options" id="evidenceOptions">
+                        <button class="evidence-btn" data-evidence="photo">Photo</button>
+                        <button class="evidence-btn" data-evidence="selfie">Selfie</button>
+                        <button class="evidence-btn" data-evidence="screenshot">Screenshot</button>
+                        <button class="evidence-btn" data-evidence="written">Written Note</button>
+                    </div>
+                </div>
+
+                <div class="challenge-points">
+                    <span class="challenge-points-label">Points Earned:</span>
+                    <span class="challenge-points-value" id="pointsValue">+25</span>
+                </div>
+            </div>
+
+            <!-- Interactive Challenge Container (Hidden by default) -->
+            <div id="interactiveChallenge" style="display: none;"></div>
+
+            <div class="modal-footer">
+                <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
+                <button class="btn btn-submit" id="submitBtn">Submit Challenge</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Nova</h3>
+                    <p>Flip the pressure. Real challenges, real support for teens.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#problem">The Problem</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#challenges">Challenges</a></li>
+                        <li><a href="#vent-wall">Vent Wall</a></li>
+                        <li><a href="#myth-fact">Myth/Fact</a></li>
+                        <li><a href="#">Team Leaderboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>For Schools</h3>
+                    <ul>
+                        <li><a href="#">Bring Junto to Your School</a></li>
+                        <li><a href="#">Counselor Dashboard</a></li>
+                        <li><a href="#">Pilot Program</a></li>
+                        <li><a href="#">Research & Impact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Nova. All rights reserved. | Flip the Pressure.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== DATA STORAGE =====
+        const appState = {
+            userTeam: null,
+            points: 0,
+            completedChallenges: [],
+            ventPosts: [
+                { id: 1, text: 'Feeling overwhelmed with exams and everyone seems to be handling it better than me.', reactions: { heart: 12, help: 8, strong: 5 } },
+                { id: 2, text: 'Someone offered me a vape today and I said no but it was really hard.', reactions: { heart: 25, help: 15, strong: 10, proud: 20 } }
+            ],
+            nextPostId: 3,
+            reactionCounts: {}
+        };
+
+        // ===== TEAM SELECTION =====
+        function setupTeamSelection() {
+            const joinBtn = document.querySelector('.hero .btn');
+            joinBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const teams = ['Red Team', 'Blue Team', 'Green Team', 'Yellow Team'];
+                const selectedTeam = prompt('Choose your team:\n1. Red Team\n2. Blue Team\n3. Green Team\n4. Yellow Team\n\nEnter 1-4:', '1');
+                
+                if (selectedTeam && selectedTeam >= 1 && selectedTeam <= 4) {
+                    appState.userTeam = teams[selectedTeam - 1];
+                    alert('Welcome to ' + appState.userTeam + '! Start completing challenges to earn points!');
+                    updateTeamDisplay();
+                }
+            });
+        }
+
+        function updateTeamDisplay() {
+            const heroContent = document.querySelector('.hero-content');
+            if (appState.userTeam) {
+                let teamDisplay = heroContent.querySelector('.team-display');
+                if (!teamDisplay) {
+                    teamDisplay = document.createElement('div');
+                    teamDisplay.className = 'team-display';
+                    teamDisplay.style.cssText = 'margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.2); border-radius: 10px; font-size: 1.1rem;';
+                    heroContent.appendChild(teamDisplay);
+                }
+                teamDisplay.innerHTML = `<strong>${appState.userTeam}</strong> | Points: ${appState.points} <i class="fas fa-star" style="color: var(--accent);"></i>`;
+            }
+        }
+
+        // ===== CHALLENGE DATA =====
+        const challenges = [
+            {
+                id: 1,
+                title: 'The 15-Min Unplug',
+                points: 25,
+                type: 'timer',
+                description: 'Log a 15-minute activity without your phone. Draw, walk, talk to a family member. Your brain will thank you.',
+                steps: [
+                    'Select an activity below',
+                    'Put your phone away completely',
+                    'Start the timer and complete your activity',
+                    'When time is up, submit your evidence'
+                ],
+                icon: 'fas fa-mobile-alt',
+                activities: [
+                    { name: 'Draw', icon: 'fas fa-paintbrush' },
+                    { name: 'Walk', icon: 'fas fa-person-walking' },
+                    { name: 'Read', icon: 'fas fa-book' },
+                    { name: 'Chat', icon: 'fas fa-comments' }
+                ]
+            },
+            {
+                id: 2,
+                title: 'The "No" Scenario',
+                points: 50,
+                type: 'roleplay',
+                description: 'A 3-person in-app role-play. Be the "pressurer," "target," or "supportive bystander" to practice saying no.',
+                steps: [
+                    'Choose your role in the scenario',
+                    'Read the dialogue and understand your part',
+                    'Respond with your role-play dialogue',
+                    'Complete all dialogue exchanges'
+                ],
+                icon: 'fas fa-user-friends',
+                roles: ['Pressurer', 'Target', 'Supportive Bystander']
+            },
+            {
+                id: 3,
+                title: 'Creative Outlet',
+                points: 30,
+                type: 'comic',
+                description: 'Use our 3-panel comic creator to show a moment of stress and a positive response.',
+                steps: [
+                    'Panel 1: Describe a stressful moment',
+                    'Panel 2: Show your coping strategy',
+                    'Panel 3: Show the positive outcome',
+                    'Add a final reflection'
+                ],
+                icon: 'fas fa-paint-brush',
+                panels: [
+                    { title: 'Panel 1: The Stressful Moment', placeholder: 'What happened? Describe the stress...' },
+                    { title: 'Panel 2: My Coping Strategy', placeholder: 'What did you do to cope? How did you respond?' },
+                    { title: 'Panel 3: The Positive Outcome', placeholder: 'What was the result? How did it help?' }
+                ]
+            }
+        ];
+
+        // ===== CHALLENGE COMPLETION =====
+        function setupChallenges() {
+            document.querySelectorAll('.challenge-card').forEach((card, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'btn';
+                btn.style.cssText = 'margin-top: 1rem; width: 100%;';
+                btn.textContent = 'Start Challenge';
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openChallengeModal(index);
+                });
+                card.appendChild(btn);
+            });
+
+            setupChallengeModal();
+        }
+
+        function setupChallengeModal() {
+            const modal = document.getElementById('challengeModal');
+            const closeBtn = document.querySelector('.close-btn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const evidenceOptions = document.querySelectorAll('.evidence-btn');
+
+            let selectedEvidence = null;
+            let currentChallengeId = null;
+
+            closeBtn.addEventListener('click', closeChallengeModal);
+            cancelBtn.addEventListener('click', closeChallengeModal);
+
+            // Evidence selection
+            evidenceOptions.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    evidenceOptions.forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedEvidence = this.getAttribute('data-evidence');
+                });
+            });
+
+            // Submit challenge
+            submitBtn.addEventListener('click', function() {
+                if (!appState.userTeam) {
+                    alert('Please join a team first!');
+                    return;
+                }
+
+                if (!selectedEvidence) {
+                    alert('Please select how you completed this challenge!');
+                    return;
+                }
+
+                const interactiveChallenge = document.getElementById('interactiveChallenge');
+                const challenge = challenges.find(c => c.id === currentChallengeId);
+                if (!challenge) return;
+
+                // Validate interactive challenge completion
+                if (challenge.type === 'timer') {
+                    const timerDisplay = document.getElementById('timerDisplay');
+                    if (!timerDisplay || timerDisplay.textContent === '15:00') {
+                        alert('Please complete your 15-minute unplug first!');
+                        return;
+                    }
+                } else if (challenge.type === 'roleplay') {
+                    const reflectionText = document.getElementById('reflectionText');
+                    if (!reflectionText || !reflectionText.value.trim()) {
+                        alert('Please write your reflection about the role-play!');
+                        return;
+                    }
+                } else if (challenge.type === 'comic') {
+                    const panels = document.querySelectorAll('.comic-panel-input');
+                    for (let panel of panels) {
+                        if (!panel.value.trim()) {
+                            alert('Please complete all three comic panels!');
+                            return;
+                        }
+                    }
+                }
+
+                if (appState.completedChallenges.includes(currentChallengeId)) {
+                    alert('You already completed this challenge! Come back tomorrow for more.');
+                    return;
+                }
+
+                // Complete the challenge
+                appState.points += challenge.points;
+                appState.completedChallenges.push(currentChallengeId);
+
+                alert(`🎉 Challenge Complete!\n\n"${challenge.title}"\n+${challenge.points} points for ${appState.userTeam}!\n\nEvidence: ${selectedEvidence}`);
+                
+                confetti();
+                closeChallengeModal();
+                updateTeamDisplay();
+                selectedEvidence = null;
+                currentChallengeId = null;
+            });
+
+            function closeChallengeModal() {
+                modal.style.display = 'none';
+                evidenceOptions.forEach(b => b.classList.remove('selected'));
+                document.getElementById('challengeContent').style.display = 'block';
+                document.getElementById('interactiveChallenge').style.display = 'none';
+                selectedEvidence = null;
+            }
+
+            // Store reference to currentChallengeId in submitBtn for access
+            submitBtn.setupChallenge = function(challengeId) {
+                currentChallengeId = challengeId;
+            };
+        }
+
+        function openChallengeModal(index) {
+            if (!appState.userTeam) {
+                alert('Please join a team first!');
+                return;
+            }
+
+            const challenge = challenges[index];
+            const modal = document.getElementById('challengeModal');
+            const challengeContent = document.getElementById('challengeContent');
+            const interactiveChallenge = document.getElementById('interactiveChallenge');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Set current challenge for submission
+            submitBtn.setupChallenge(challenge.id);
+
+            // Populate modal header
+            document.getElementById('modalTitle').textContent = challenge.title;
+            document.getElementById('pointsValue').textContent = `+${challenge.points}`;
+
+            if (challenge.type === 'timer') {
+                renderTimerChallenge(challenge, challengeContent, interactiveChallenge);
+            } else if (challenge.type === 'roleplay') {
+                renderRoleplayChallenge(challenge, challengeContent, interactiveChallenge);
+            } else if (challenge.type === 'comic') {
+                renderComicChallenge(challenge, challengeContent, interactiveChallenge);
+            }
+
+            // Reset evidence selection
+            document.querySelectorAll('.evidence-btn').forEach(b => b.classList.remove('selected'));
+
+            // Show modal
+            modal.style.display = 'block';
+
+            // Close on background click
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    challengeContent.style.display = 'block';
+                    interactiveChallenge.style.display = 'none';
+                }
+            });
+        }
+
+        function renderTimerChallenge(challenge, challengeContent, interactiveChallenge) {
+            let timeLeft = 15 * 60; // 15 minutes in seconds
+            let isRunning = false;
+            let selectedActivity = null;
+
+            const html = `
+                <h3>Select Your Activity</h3>
+                <div class="activity-selector" id="activitySelector">
+                    ${challenge.activities.map(activity => 
+                        `<div class="activity-option" data-activity="${activity.name}">
+                            <i class="${activity.icon}"></i>
+                            ${activity.name}
+                        </div>`
+                    ).join('')}
+                </div>
+                
+                <div class="timer-container">
+                    <div class="timer-label">Time Remaining</div>
+                    <div class="timer-display" id="timerDisplay">15:00</div>
+                    <div class="timer-controls">
+                        <button class="timer-btn" id="startBtn">Start Timer</button>
+                        <button class="timer-btn" id="pauseBtn" disabled>Pause</button>
+                        <button class="timer-btn" id="resetBtn">Reset</button>
+                    </div>
+                </div>
+            `;
+
+            challengeContent.style.display = 'none';
+            interactiveChallenge.style.display = 'block';
+            interactiveChallenge.innerHTML = html;
+
+            // Setup activity selection
+            document.querySelectorAll('.activity-option').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.activity-option').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedActivity = this.getAttribute('data-activity');
+                });
+            });
+
+            // Timer functions
+            const updateDisplay = () => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timerDisplay').textContent = 
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            };
+
+            const timerInterval = setInterval(() => {
+                if (isRunning && timeLeft > 0) {
+                    timeLeft--;
+                    updateDisplay();
+                } else if (timeLeft === 0 && isRunning) {
+                    isRunning = false;
+                    alert('Great work! You completed your 15-minute unplug challenge!');
+                    clearInterval(timerInterval);
+                }
+            }, 1000);
+
+            document.getElementById('startBtn').addEventListener('click', () => {
+                if (!selectedActivity) {
+                    alert('Please select an activity first!');
+                    return;
+                }
+                isRunning = true;
+                document.getElementById('startBtn').disabled = true;
+                document.getElementById('pauseBtn').disabled = false;
+            });
+
+            document.getElementById('pauseBtn').addEventListener('click', () => {
+                isRunning = false;
+                document.getElementById('startBtn').disabled = false;
+                document.getElementById('pauseBtn').disabled = true;
+            });
+
+            document.getElementById('resetBtn').addEventListener('click', () => {
+                isRunning = false;
+                timeLeft = 15 * 60;
+                updateDisplay();
+                document.getElementById('startBtn').disabled = false;
+                document.getElementById('pauseBtn').disabled = true;
+            });
+        }
+
+        function renderRoleplayChallenge(challenge, challengeContent, interactiveChallenge) {
+            const scenarios = {
+                'Pressurer': `"Hey, everyone's going to the party tonight. You should come. They have some stuff to try." 
+                    <br><br>Your task: Try to pressure someone to do something risky.`,
+                'Target': `Someone offers you a vape at a party. You want to fit in but you're not sure.
+                    <br><br>Your task: Practice saying no and explaining your decision.`,
+                'Supportive Bystander': `You see a friend being pressured to try drugs. They look uncomfortable.
+                    <br><br>Your task: Intervene and support your friend.`
+            };
+
+            const responses = {
+                'Pressurer': 'I\'d suggest: "Come on, just try it once. It\'s not a big deal. What could go wrong?"',
+                'Target': 'I\'d say: "Thanks, but no thanks. I need to take care of my health. Let\'s do something else instead."',
+                'Supportive Bystander': 'I\'d tell my friend: "You don\'t have to do anything you\'re not comfortable with. Want to get some air with me?"'
+            };
+
+            let selectedRole = null;
+
+            const html = `
+                <h3>Choose Your Role</h3>
+                <div class="role-selector" id="roleSelector">
+                    ${challenge.roles.map(role => 
+                        `<button class="role-btn" data-role="${role}">${role}</button>`
+                    ).join('')}
+                </div>
+                
+                <div id="scenarioContent" style="display: none;">
+                    <div class="scenario-container">
+                        <div class="scenario-text" id="scenarioText"></div>
+                        <div class="dialogue-box">
+                            <div class="dialogue-speaker">Suggested Response:</div>
+                            <div class="dialogue-text" id="dialogueResponse"></div>
+                        </div>
+                        <div class="reflection-box">
+                            <label>Your Reflection (How did that feel? What did you learn?)</label>
+                            <textarea id="reflectionText" placeholder="Share your thoughts..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            challengeContent.style.display = 'none';
+            interactiveChallenge.style.display = 'block';
+            interactiveChallenge.innerHTML = html;
+
+            document.querySelectorAll('.role-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    selectedRole = this.getAttribute('data-role');
+                    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+
+                    document.getElementById('scenarioText').innerHTML = scenarios[selectedRole];
+                    document.getElementById('dialogueResponse').innerHTML = responses[selectedRole];
+                    document.getElementById('scenarioContent').style.display = 'block';
+                });
+            });
+        }
+
+        function renderComicChallenge(challenge, challengeContent, interactiveChallenge) {
+            const html = `
+                <h3>Create Your 3-Panel Comic</h3>
+                <div class="comic-panel-container" id="comicPanels">
+                    ${challenge.panels.map((panel, idx) => 
+                        `<div class="comic-panel">
+                            <div class="comic-panel-title">${panel.title}</div>
+                            <textarea class="comic-panel-input" placeholder="${panel.placeholder}" data-panel="${idx}"></textarea>
+                        </div>`
+                    ).join('')}
+                </div>
+                <div class="reflection-box">
+                    <label><i class="fas fa-lightbulb"></i> Final Reflection</label>
+                    <textarea id="comicReflection" placeholder="What did this exercise teach you about managing stress?"></textarea>
+                </div>
+            `;
+
+            challengeContent.style.display = 'none';
+            interactiveChallenge.style.display = 'block';
+            interactiveChallenge.innerHTML = html;
+        }
+
+        // ===== VENT WALL FUNCTIONALITY =====
+        function setupVentWall() {
+            const postBtn = document.querySelector('.new-vent .btn');
+            const textarea = document.querySelector('.new-vent textarea');
+
+            postBtn.addEventListener('click', function() {
+                const text = textarea.value.trim();
+                if (!text) {
+                    alert('Please write something before posting!');
+                    return;
+                }
+
+                // Add new post
+                const newPost = document.createElement('div');
+                newPost.className = 'vent-post';
+                newPost.innerHTML = `
+                    <div class="vent-content">
+                        <p>${escapeHtml(text)}</p>
+                    </div>
+                    <div class="vent-comments-section">
+                        <div class="vent-comments-header">Comments (0)</div>
+                        <div class="vent-comment-input">
+                            <input type="text" class="comment-input" placeholder="Write a supportive comment...">
+                            <button class="add-comment-btn"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                `;
+
+                // Add to container before the new-vent section
+                document.querySelector('.vent-container').insertBefore(newPost, document.querySelector('.new-vent'));
+                
+                // Setup comments for new post
+                setupCommentSection(newPost);
+                
+                // Clear textarea
+                textarea.value = '';
+                
+                alert('Your post has been shared anonymously!');
+            });
+
+            // Setup initial comments
+            document.querySelectorAll('.vent-post').forEach(post => {
+                setupCommentSection(post);
+            });
+        }
+
+        function setupCommentSection(postElement) {
+            const addBtn = postElement.querySelector('.add-comment-btn');
+            const input = postElement.querySelector('.comment-input');
+
+            addBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const commentText = input.value.trim();
+                if (!commentText) {
+                    alert('Please write a comment!');
+                    return;
+                }
+
+                // Create new comment
+                const newComment = document.createElement('div');
+                newComment.className = 'vent-comment';
+                const authors = ['Anonymous', 'Peer Supporter', 'Health Mentor', 'Friend', 'Ally'];
+                const randomAuthor = authors[Math.floor(Math.random() * authors.length)];
+                
+                newComment.innerHTML = `
+                    <div class="vent-comment-author">${randomAuthor}</div>
+                    <div class="vent-comment-text">${escapeHtml(commentText)}</div>
+                    <div class="vent-comment-time">just now</div>
+                `;
+
+                // Insert comment before the input section
+                const commentsSection = postElement.querySelector('.vent-comments-section');
+                commentsSection.insertBefore(newComment, postElement.querySelector('.vent-comment-input'));
+
+                // Update comment count
+                const header = postElement.querySelector('.vent-comments-header');
+                const currentCount = postElement.querySelectorAll('.vent-comment').length;
+                header.textContent = `Comments (${currentCount})`;
+
+                // Clear input
+                input.value = '';
+                input.focus();
+
+                // Animation
+                newComment.style.animation = 'slideIn 0.3s ease';
+            });
+
+            // Allow Enter key to submit
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addBtn.click();
+                }
+            });
+        }
+
+        // ===== QUIZ FUNCTIONALITY =====
+        const quizzes = [
+            {
+                question: 'MYTH OR FACT: Vaping is just harmless water vapor.',
+                correct: 'myth',
+                explanation: 'Vaping aerosol is not harmless water vapor. It contains harmful chemicals and ultrafine particles that can be inhaled deep into the lungs.'
+            },
+            {
+                question: 'MYTH OR FACT: One energy drink is equivalent to one cup of coffee.',
+                correct: 'myth',
+                explanation: 'Energy drinks often contain 2-10 times more caffeine than coffee and added sugars that spike blood pressure dangerously.'
+            },
+            {
+                question: 'MYTH OR FACT: Peer pressure only affects kids with low self-esteem.',
+                correct: 'myth',
+                explanation: 'Peer pressure affects everyone. Even confident people are influenced by their peers, which is a normal part of social development.'
+            }
+        ];
+
+        let currentQuizIndex = 0;
+
+        function setupQuiz() {
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'btn';
+            nextBtn.textContent = 'Next Question';
+            nextBtn.style.cssText = 'margin-top: 1rem; display: none;';
+            nextBtn.id = 'next-quiz-btn';
+            document.querySelector('.quiz-container').appendChild(nextBtn);
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    handleQuizAnswer(this);
+                });
+            });
+        }
+
+        function handleQuizAnswer(selectedOption) {
+            const answer = selectedOption.getAttribute('data-answer');
+            const quiz = quizzes[currentQuizIndex];
+            const results = document.getElementById('quiz-results');
+            
+            // Show results
+            results.style.display = 'block';
+            
+            // Update explanation
+            document.querySelector('.quiz-results strong').textContent = 'Correct Answer: ' + quiz.correct.toUpperCase();
+            document.querySelector('.quiz-results p:nth-child(3)').textContent = quiz.explanation;
+
+            // Highlight correct/incorrect
+            const correctOption = document.querySelector(`.quiz-option[data-answer="${quiz.correct}"]`);
+            const incorrectOption = document.querySelector(`.quiz-option[data-answer="${quiz.correct === 'myth' ? 'fact' : 'myth'}"]`);
+            
+            if (answer === quiz.correct) {
+                selectedOption.style.backgroundColor = 'var(--success)';
+                selectedOption.style.color = 'var(--white)';
+                if (appState.userTeam) appState.points += 10;
+            } else {
+                selectedOption.style.backgroundColor = 'var(--danger)';
+                selectedOption.style.color = 'var(--white)';
+            }
+
+            correctOption.style.backgroundColor = 'var(--success)';
+            correctOption.style.color = 'var(--white)';
+            
+            // Disable further clicks and show next button
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+
+            const nextBtn = document.getElementById('next-quiz-btn');
+            nextBtn.style.display = 'block';
+            nextBtn.onclick = loadNextQuiz;
+        }
+
+        function loadNextQuiz() {
+            currentQuizIndex = (currentQuizIndex + 1) % quizzes.length;
+            const quiz = quizzes[currentQuizIndex];
+            
+            document.getElementById('quiz-question').textContent = quiz.question;
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.style.backgroundColor = '';
+                opt.style.color = '';
+                opt.style.pointerEvents = 'auto';
+            });
+            
+            document.getElementById('quiz-results').style.display = 'none';
+            document.getElementById('next-quiz-btn').style.display = 'none';
+        }
+
+        // ===== UTILITY FUNCTIONS =====
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function confetti() {
+            const colors = ['#ff6d00', '#1a237e', '#4caf50', '#ff9800'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    left: ${Math.random() * 100}%;
+                    top: -10px;
+                    width: 10px;
+                    height: 10px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    border-radius: 50%;
+                    pointer-events: none;
+                    animation: fall ${2 + Math.random() * 1}s linear forwards;
+                    z-index: 9999;
+                `;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        // ===== ANIMATIONS =====
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotateZ(360deg);
+                    opacity: 0;
+                }
+            }
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ===== MOBILE MENU =====
+        function setupMobileMenu() {
+            document.querySelector('.mobile-menu').addEventListener('click', function() {
+                const nav = document.querySelector('nav ul');
+                if (nav.style.display === 'flex') {
+                    nav.style.display = 'none';
+                } else {
+                    nav.style.display = 'flex';
+                    nav.style.flexDirection = 'column';
+                    nav.style.position = 'absolute';
+                    nav.style.top = '60px';
+                    nav.style.right = '20px';
+                    nav.style.background = 'var(--primary)';
+                    nav.style.padding = '1rem';
+                    nav.style.borderRadius = '10px';
+                    nav.style.boxShadow = 'var(--shadow)';
+                }
+            });
+        }
+
+        // ===== INITIALIZATION =====
+        document.addEventListener('DOMContentLoaded', function() {
+            setupTeamSelection();
+            setupChallenges();
+            setupVentWall();
+            setupQuiz();
+            setupMobileMenu();
+            console.log('Nova app initialized successfully!');
+        });
+    </script>
+</body>
+</html>
