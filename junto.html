@@ -808,6 +808,89 @@
             font-family: inherit;
         }
 
+        /* Creative Photo Challenge Styles */
+        .creative-photo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .prompt-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .prompt-box p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .prompt-box strong {
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .photo-upload-section {
+            margin: 1rem 0;
+        }
+
+        .upload-area {
+            border: 3px dashed var(--primary);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            background-color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--accent);
+            background-color: #f0f4ff;
+        }
+
+        .upload-placeholder {
+            pointer-events: none;
+        }
+
+        .upload-placeholder p {
+            margin: 0.5rem 0;
+            color: #666;
+        }
+
+        #photoPreview {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        #previewImg {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+
         /* Quiz Timer Styles */
         .quiz-timer {
             position: absolute;
@@ -1640,57 +1723,48 @@
         const challenges = [
             {
                 id: 1,
-                title: 'The 15-Min Unplug',
+                title: 'Stress-Busting Doodle',
                 points: 25,
-                type: 'timer',
-                description: 'Log a 15-minute activity without your phone. Draw, walk, talk to a family member. Your brain will thank you.',
+                type: 'creative-photo',
+                description: 'Draw or create your own stress-busting artwork! Take a picture of your creation and share it.',
                 steps: [
-                    'Select an activity below',
-                    'Put your phone away completely',
-                    'Start the timer and complete your activity',
-                    'When time is up, submit your evidence'
+                    'Create your artwork (draw, paint, collage, etc.)',
+                    'Take a clear photo of your finished creation',
+                    'Upload the photo as evidence',
+                    'Share what you created and how it helped you'
                 ],
-                icon: 'fas fa-mobile-alt',
-                activities: [
-                    { name: 'Draw', icon: 'fas fa-paintbrush' },
-                    { name: 'Walk', icon: 'fas fa-person-walking' },
-                    { name: 'Read', icon: 'fas fa-book' },
-                    { name: 'Chat', icon: 'fas fa-comments' }
-                ]
+                icon: 'fas fa-palette',
+                prompt: 'Show us your stress-busting masterpiece!'
             },
             {
                 id: 2,
-                title: 'The "No" Scenario',
+                title: 'Coping Strategy Vision Board',
                 points: 50,
-                type: 'roleplay',
-                description: 'A 3-person in-app role-play. Be the "pressurer," "target," or "supportive bystander" to practice saying no.',
+                type: 'creative-photo',
+                description: 'Create a vision board with images, words, and quotes that inspire healthy coping. Take a photo when done!',
                 steps: [
-                    'Choose your role in the scenario',
-                    'Read the dialogue and understand your part',
-                    'Respond with your role-play dialogue',
-                    'Complete all dialogue exchanges'
+                    'Gather magazines, images, or print materials',
+                    'Create your vision board with positive messages',
+                    'Take a photo of your finished board',
+                    'Upload and explain your coping strategies'
                 ],
-                icon: 'fas fa-user-friends',
-                roles: ['Pressurer', 'Target', 'Supportive Bystander']
+                icon: 'fas fa-images',
+                prompt: 'Share your inspiring vision board!'
             },
             {
                 id: 3,
-                title: 'Creative Outlet',
+                title: 'Positive Affirmation Poster',
                 points: 30,
-                type: 'comic',
-                description: 'Use our 3-panel comic creator to show a moment of stress and a positive response.',
+                type: 'creative-photo',
+                description: 'Design and create a powerful affirmation poster. Photograph it and share your positive message with the community!',
                 steps: [
-                    'Panel 1: Describe a stressful moment',
-                    'Panel 2: Show your coping strategy',
-                    'Panel 3: Show the positive outcome',
-                    'Add a final reflection'
+                    'Design a poster with affirmations or positive messages',
+                    'Use markers, paint, digital tools, or mixed media',
+                    'Take a photo of your poster',
+                    'Upload and share the affirmation you need most'
                 ],
-                icon: 'fas fa-paint-brush',
-                panels: [
-                    { title: 'Panel 1: The Stressful Moment', placeholder: 'What happened? Describe the stress...' },
-                    { title: 'Panel 2: My Coping Strategy', placeholder: 'What did you do to cope? How did you respond?' },
-                    { title: 'Panel 3: The Positive Outcome', placeholder: 'What was the result? How did it help?' }
-                ]
+                icon: 'fas fa-certificate',
+                prompt: 'Display your powerful affirmation poster!'
             }
         ];
 
@@ -1770,6 +1844,17 @@
                             return;
                         }
                     }
+                } else if (challenge.type === 'creative-photo') {
+                    const photoInput = document.getElementById('creativePhotoUpload');
+                    const reflectionText = document.getElementById('creativeReflection');
+                    if (!photoInput || !photoInput.files || photoInput.files.length === 0) {
+                        alert('Please upload a photo of your creation!');
+                        return;
+                    }
+                    if (!reflectionText || !reflectionText.value.trim()) {
+                        alert('Please share your reflection about your creative work!');
+                        return;
+                    }
                 }
 
                 if (appState.completedChallenges.includes(currentChallengeId)) {
@@ -1829,6 +1914,8 @@
                 renderRoleplayChallenge(challenge, challengeContent, interactiveChallenge);
             } else if (challenge.type === 'comic') {
                 renderComicChallenge(challenge, challengeContent, interactiveChallenge);
+            } else if (challenge.type === 'creative-photo') {
+                renderCreativePhotoChallenge(challenge, challengeContent, interactiveChallenge);
             }
 
             // Reset evidence selection
@@ -2010,6 +2097,98 @@
             interactiveChallenge.style.display = 'block';
             interactiveChallenge.innerHTML = html;
         }
+
+        function renderCreativePhotoChallenge(challenge, challengeContent, interactiveChallenge) {
+            const html = `
+                <h3>${challenge.title}</h3>
+                <div class="creative-photo-container">
+                    <div class="prompt-box">
+                        <div style="font-size: 2em; margin-bottom: 1rem;">✨</div>
+                        <p style="font-size: 1.3em; font-weight: 700; margin: 0; letter-spacing: 0.5px;">${challenge.prompt}</p>
+                        <div style="height: 2px; background: rgba(255,255,255,0.3); margin: 1rem 0;"></div>
+                        <p style="color: rgba(255,255,255,0.95); font-size: 1em; margin: 0; font-weight: 500;">
+                            Create your artwork, then take a clear photo and upload it below.
+                        </p>
+                    </div>
+
+                    <div class="photo-upload-section">
+                        <div class="upload-area" id="uploadArea">
+                            <input type="file" id="creativePhotoUpload" accept="image/*" style="display: none;">
+                            <div class="upload-placeholder">
+                                <i class="fas fa-cloud-upload-alt" style="font-size: 3em; color: #007bff; margin-bottom: 1rem;"></i>
+                                <p style="font-size: 1.1em; font-weight: 600; color: #333;"><strong>📸 Click to upload your photo</strong></p>
+                                <p style="font-size: 0.95em; color: #666; margin-bottom: 1rem;">or drag and drop (JPG, PNG, GIF)</p>
+                                <button class="btn" style="margin-top: 1rem;" id="uploadBtn">🖼️ Choose Photo</button>
+                            </div>
+                            <div id="photoPreview" style="display: none; text-align: center; padding: 1rem;">
+                                <img id="previewImg" style="max-width: 100%; max-height: 300px; border-radius: 8px;">
+                                <p id="fileName" style="margin-top: 0.5rem; color: #666; font-weight: 500;"></p>
+                                <button class="btn btn-secondary" id="changePhotoBtn" style="margin-top: 0.5rem;">🔄 Change Photo</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reflection-box">
+                        <label><i class="fas fa-pen-fancy"></i> 💭 Tell us about your creation:</label>
+                        <textarea id="creativeReflection" placeholder="What did you create? How did making this help you? What does it mean to you?"></textarea>
+                    </div>
+                </div>
+            `;
+
+            challengeContent.style.display = 'none';
+            interactiveChallenge.style.display = 'block';
+            interactiveChallenge.innerHTML = html;
+
+            // Setup photo upload functionality
+            const fileInput = document.getElementById('creativePhotoUpload');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const uploadArea = document.getElementById('uploadArea');
+            const photoPreview = document.getElementById('photoPreview');
+            const previewImg = document.getElementById('previewImg');
+            const fileName = document.getElementById('fileName');
+            const changePhotoBtn = document.getElementById('changePhotoBtn');
+
+            uploadBtn.addEventListener('click', () => fileInput.click());
+
+            fileInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    displayPhoto(this.files[0]);
+                }
+            });
+
+            // Drag and drop
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.backgroundColor = '#e9ecef';
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.backgroundColor = '';
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.backgroundColor = '';
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                    fileInput.files = e.dataTransfer.files;
+                    displayPhoto(e.dataTransfer.files[0]);
+                }
+            });
+
+            changePhotoBtn.addEventListener('click', () => fileInput.click());
+
+            function displayPhoto(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    fileName.textContent = file.name;
+                    document.querySelector('.upload-placeholder').style.display = 'none';
+                    photoPreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
 
         // ===== VENT WALL FUNCTIONALITY =====
         function setupVentWall() {
