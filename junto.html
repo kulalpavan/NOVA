@@ -808,6 +808,107 @@
             font-family: inherit;
         }
 
+        /* Quiz Timer Styles */
+        .quiz-timer {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 0.8rem 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timer-value {
+            font-size: 1.2rem;
+            font-family: 'Courier New', monospace;
+            color: var(--accent);
+        }
+
+        .quiz-progress {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .quiz-progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-progress-fill {
+            height: 100%;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .quiz-progress-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .quiz-score-display {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .quiz-score-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-score-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .quiz-results.show-results {
+            display: block !important;
+        }
+
+        .results-bar {
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            margin: 1rem 0;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .myth-bar, .fact-bar {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        .myth-bar {
+            background-color: var(--danger);
+            width: 35%;
+        }
+
+        .fact-bar {
+            background-color: var(--success);
+            width: 65%;
+        }
+
         /* Vent Wall Section */
         .vent-wall {
             padding: 5rem 0;
@@ -1355,6 +1456,20 @@
                 <p>Get smarter in 30 seconds with our daily quizzes</p>
             </div>
             <div class="quiz-container">
+                <div class="quiz-timer">
+                    <i class="fas fa-clock"></i>
+                    <span class="timer-value" id="quizTimer">30</span>s
+                </div>
+                
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="quizProgressFill" style="width: 33%;"></div>
+                    </div>
+                    <div class="quiz-progress-text">
+                        Question <span id="currentQuizNum">1</span> of <span id="totalQuizNum">3</span>
+                    </div>
+                </div>
+
                 <div class="quiz-question" id="quiz-question">
                     MYTH OR FACT: Vaping is just harmless water vapor.
                 </div>
@@ -1365,11 +1480,16 @@
                 <div class="quiz-results" id="quiz-results">
                     <h3>Class Results</h3>
                     <div class="results-bar">
-                        <div class="myth-bar">35% MYTH</div>
-                        <div class="fact-bar">65% FACT</div>
+                        <div class="myth-bar" id="mythPercentage">35% MYTH</div>
+                        <div class="fact-bar" id="factPercentage">65% FACT</div>
                     </div>
-                    <p><strong>Correct Answer: MYTH</strong></p>
-                    <p>Vaping aerosol is not harmless water vapor. It contains harmful chemicals and ultrafine particles that can be inhaled deep into the lungs.</p>
+                    <p><strong id="correctAnswerText">Correct Answer: MYTH</strong></p>
+                    <p id="explanationText">Vaping aerosol is not harmless water vapor. It contains harmful chemicals and ultrafine particles that can be inhaled deep into the lungs.</p>
+                </div>
+
+                <div class="quiz-score-display">
+                    <div class="quiz-score-label">Your Quiz Score</div>
+                    <div class="quiz-score-value" id="quizScoreValue">0</div>
                 </div>
             </div>
         </div>
@@ -1991,88 +2111,221 @@
             {
                 question: 'MYTH OR FACT: Vaping is just harmless water vapor.',
                 correct: 'myth',
-                explanation: 'Vaping aerosol is not harmless water vapor. It contains harmful chemicals and ultrafine particles that can be inhaled deep into the lungs.'
+                explanation: 'Vaping aerosol is not harmless water vapor. It contains harmful chemicals and ultrafine particles that can be inhaled deep into the lungs.',
+                mythPercent: 35,
+                factPercent: 65
             },
             {
                 question: 'MYTH OR FACT: One energy drink is equivalent to one cup of coffee.',
                 correct: 'myth',
-                explanation: 'Energy drinks often contain 2-10 times more caffeine than coffee and added sugars that spike blood pressure dangerously.'
+                explanation: 'Energy drinks often contain 2-10 times more caffeine than coffee and added sugars that spike blood pressure dangerously.',
+                mythPercent: 42,
+                factPercent: 58
             },
             {
                 question: 'MYTH OR FACT: Peer pressure only affects kids with low self-esteem.',
                 correct: 'myth',
-                explanation: 'Peer pressure affects everyone. Even confident people are influenced by their peers, which is a normal part of social development.'
+                explanation: 'Peer pressure affects everyone. Even confident people are influenced by their peers, which is a normal part of social development.',
+                mythPercent: 28,
+                factPercent: 72
+            },
+            {
+                question: 'MYTH OR FACT: Smoking just one cigarette can get you addicted.',
+                correct: 'fact',
+                explanation: 'Many people can become addicted to nicotine from their very first cigarette. Addiction depends on individual biology and frequency of use.',
+                mythPercent: 55,
+                factPercent: 45
+            },
+            {
+                question: 'MYTH OR FACT: Alcohol kills brain cells immediately.',
+                correct: 'myth',
+                explanation: 'While excessive alcohol can damage the brain over time, occasional moderate drinking doesn\'t directly kill brain cells. However, heavy drinking and binge drinking do cause damage.',
+                mythPercent: 68,
+                factPercent: 32
+            },
+            {
+                question: 'MYTH OR FACT: It\'s easier to quit vaping than smoking cigarettes.',
+                correct: 'myth',
+                explanation: 'Vaping is actually harder to quit for some people because it\'s easier to do frequently (no smell, less stigma), leading to higher nicotine dependence.',
+                mythPercent: 51,
+                factPercent: 49
             }
         ];
 
         let currentQuizIndex = 0;
+        let quizScore = 0;
+        let totalQuestionsAnswered = 0;
+        let quizTimer = null;
+        let timeRemaining = 30;
+        let answered = false;
 
         function setupQuiz() {
-            const nextBtn = document.createElement('button');
-            nextBtn.className = 'btn';
-            nextBtn.textContent = 'Next Question';
-            nextBtn.style.cssText = 'margin-top: 1rem; display: none;';
-            nextBtn.id = 'next-quiz-btn';
-            document.querySelector('.quiz-container').appendChild(nextBtn);
-
             document.querySelectorAll('.quiz-option').forEach(option => {
                 option.addEventListener('click', function() {
-                    handleQuizAnswer(this);
+                    if (!answered) {
+                        handleQuizAnswer(this);
+                    }
                 });
             });
+
+            // Start initial timer
+            startQuizTimer();
+            updateQuizDisplay();
+        }
+
+        function startQuizTimer() {
+            timeRemaining = 30;
+            updateTimerDisplay();
+
+            if (quizTimer) clearInterval(quizTimer);
+
+            quizTimer = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    clearInterval(quizTimer);
+                    if (!answered) {
+                        // Auto-show results if no answer was selected
+                        document.getElementById('quiz-results').classList.add('show-results');
+                        answered = true;
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const timerEl = document.getElementById('quizTimer');
+            timerEl.textContent = Math.max(0, timeRemaining);
+            
+            // Change color based on time remaining
+            if (timeRemaining <= 5) {
+                timerEl.style.color = 'var(--danger)';
+            } else if (timeRemaining <= 10) {
+                timerEl.style.color = 'var(--warning)';
+            } else {
+                timerEl.style.color = 'var(--accent)';
+            }
+        }
+
+        function updateQuizDisplay() {
+            const quiz = quizzes[currentQuizIndex];
+            const totalQuizzes = quizzes.length;
+            const progressPercent = ((currentQuizIndex) / totalQuizzes) * 100;
+
+            // Update progress bar
+            document.getElementById('quizProgressFill').style.width = (progressPercent + (100 / totalQuizzes)) + '%';
+            document.getElementById('currentQuizNum').textContent = currentQuizIndex + 1;
+            document.getElementById('totalQuizNum').textContent = totalQuizzes;
+
+            // Update question
+            document.getElementById('quiz-question').textContent = quiz.question;
+
+            // Update score display
+            document.getElementById('quizScoreValue').textContent = quizScore + '/' + totalQuestionsAnswered;
         }
 
         function handleQuizAnswer(selectedOption) {
+            if (answered) return;
+            answered = true;
+
             const answer = selectedOption.getAttribute('data-answer');
             const quiz = quizzes[currentQuizIndex];
             const results = document.getElementById('quiz-results');
             
-            // Show results
-            results.style.display = 'block';
-            
-            // Update explanation
-            document.querySelector('.quiz-results strong').textContent = 'Correct Answer: ' + quiz.correct.toUpperCase();
-            document.querySelector('.quiz-results p:nth-child(3)').textContent = quiz.explanation;
+            // Clear timer
+            if (quizTimer) clearInterval(quizTimer);
 
-            // Highlight correct/incorrect
-            const correctOption = document.querySelector(`.quiz-option[data-answer="${quiz.correct}"]`);
-            const incorrectOption = document.querySelector(`.quiz-option[data-answer="${quiz.correct === 'myth' ? 'fact' : 'myth'}"]`);
+            // Show results
+            results.classList.add('show-results');
             
+            // Update explanation and results
+            document.getElementById('correctAnswerText').textContent = 'Correct Answer: ' + quiz.correct.toUpperCase();
+            document.getElementById('explanationText').textContent = quiz.explanation;
+
+            // Update class results percentages
+            const mythBar = document.getElementById('mythPercentage');
+            const factBar = document.getElementById('factPercentage');
+            mythBar.style.width = quiz.mythPercent + '%';
+            factBar.style.width = quiz.factPercent + '%';
+            mythBar.textContent = quiz.mythPercent + '% MYTH';
+            factBar.textContent = quiz.factPercent + '% FACT';
+
+            // Track score
+            totalQuestionsAnswered++;
             if (answer === quiz.correct) {
                 selectedOption.style.backgroundColor = 'var(--success)';
                 selectedOption.style.color = 'var(--white)';
+                quizScore++;
                 if (appState.userTeam) appState.points += 10;
             } else {
                 selectedOption.style.backgroundColor = 'var(--danger)';
                 selectedOption.style.color = 'var(--white)';
             }
 
+            // Show correct answer
+            const correctOption = document.querySelector(`.quiz-option[data-answer="${quiz.correct}"]`);
             correctOption.style.backgroundColor = 'var(--success)';
             correctOption.style.color = 'var(--white)';
             
-            // Disable further clicks and show next button
+            // Disable further clicks
             document.querySelectorAll('.quiz-option').forEach(opt => {
                 opt.style.pointerEvents = 'none';
             });
 
-            const nextBtn = document.getElementById('next-quiz-btn');
+            // Show next button after 2 seconds
+            setTimeout(() => {
+                showNextQuizButton();
+            }, 2000);
+
+            // Update score display
+            updateQuizDisplay();
+        }
+
+        function showNextQuizButton() {
+            let nextBtn = document.getElementById('next-quiz-btn');
+            if (!nextBtn) {
+                nextBtn = document.createElement('button');
+                nextBtn.className = 'btn';
+                nextBtn.textContent = 'Next Question';
+                nextBtn.id = 'next-quiz-btn';
+                nextBtn.style.cssText = 'margin-top: 1.5rem; width: 100%;';
+                document.querySelector('.quiz-container').appendChild(nextBtn);
+                nextBtn.addEventListener('click', loadNextQuiz);
+            }
             nextBtn.style.display = 'block';
-            nextBtn.onclick = loadNextQuiz;
         }
 
         function loadNextQuiz() {
+            // Reset for next question
+            answered = false;
             currentQuizIndex = (currentQuizIndex + 1) % quizzes.length;
+            
             const quiz = quizzes[currentQuizIndex];
             
+            // Update question
             document.getElementById('quiz-question').textContent = quiz.question;
+            
+            // Reset options
             document.querySelectorAll('.quiz-option').forEach(opt => {
                 opt.style.backgroundColor = '';
                 opt.style.color = '';
                 opt.style.pointerEvents = 'auto';
             });
             
-            document.getElementById('quiz-results').style.display = 'none';
-            document.getElementById('next-quiz-btn').style.display = 'none';
+            // Hide results and next button
+            document.getElementById('quiz-results').classList.remove('show-results');
+            const nextBtn = document.getElementById('next-quiz-btn');
+            if (nextBtn) nextBtn.style.display = 'none';
+
+            // Update display and restart timer
+            updateQuizDisplay();
+            startQuizTimer();
+
+            // Update team points if joined
+            if (appState.userTeam) {
+                updateTeamDisplay();
+            }
         }
 
         // ===== UTILITY FUNCTIONS =====
