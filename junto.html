@@ -21,6 +21,112 @@
             --transition: all 0.3s ease;
         }
 
+        /* Game Interface Styles */
+        .game-interface {
+            padding: 2rem;
+            background-color: var(--light);
+            border-radius: 10px;
+        }
+
+        .scenario-text {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            padding: 1.5rem;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .choice-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .choice-btn {
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            background-color: var(--white);
+            color: var(--primary);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .choice-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .game-feedback {
+            margin: 1.5rem 0;
+        }
+
+        .feedback-correct {
+            padding: 1rem;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feedback-incorrect {
+            padding: 1rem;
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .game-progress {
+            margin-top: 2rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--accent);
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .score {
+            text-align: right;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .game-end {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .game-end h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .game-end p {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -82,6 +188,69 @@
             font-weight: 500;
             transition: var(--transition);
             position: relative;
+        }
+
+        /* Games Section Styles */
+        .games-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--light), #fff);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .game-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .game-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .game-title {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .game-description {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .play-button {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background-color: var(--accent);
+            color: var(--white);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .play-button:hover {
+            background-color: var(--primary);
+            transform: scale(1.05);
         }
 
         nav a:hover {
@@ -2249,6 +2418,7 @@
                         <li><a href="#dashboard">Dashboard</a></li>
                         <li><a href="#leaderboard">Leaderboard</a></li>
                         <li><a href="#vent-wall">Vent Wall</a></li>
+                        <li><a href="#games">Games</a></li>
                         <li><a href="#" class="btn">Join Now</a></li>
                     </ul>
                 </nav>
@@ -2970,8 +3140,77 @@
         </div>
     </div>
 
+    <!-- Games Section -->
+    <section class="games-section" id="games">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-gamepad"></i> Interactive Games</h2>
+                <p>Learn and practice life skills through engaging games designed to help you handle peer pressure and make positive choices.</p>
+            </div>
+
+                <div class="games-grid">
+                <!-- Peer Pressure Simulator Game -->
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="game-title">Peer Pressure Simulator</h3>
+                    <p class="game-description">Navigate real-life scenarios and practice making tough decisions in this interactive story game.</p>
+                    <button class="play-button" data-game="peer-pressure">Play Now</button>
+                </div>                <!-- Decision Maker Game -->
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="game-title">Decision Maker</h3>
+                    <p class="game-description">Test your decision-making skills in time-pressured situations. Learn to think fast and smart!</p>
+                    <button class="play-button" data-game="decision-maker">Play Now</button>
+                </div>
+
+                <!-- Emotion Explorer -->
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="game-title">Emotion Explorer</h3>
+                    <p class="game-description">Identify and understand different emotions through interactive challenges and mini-games.</p>
+                    <button class="play-button" data-game="emotion-explorer">Play Now</button>
+                </div>
+
+                <!-- Confidence Builder -->
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="game-title">Confidence Builder</h3>
+                    <p class="game-description">Build self-confidence through fun challenges and positive reinforcement activities.</p>
+                    <button class="play-button" data-game="confidence-builder">Play Now</button>
+                </div>
+
+                <!-- Team Strategy Game -->
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3 class="game-title">Team Strategy</h3>
+                    <p class="game-description">Work with your team to solve puzzles and overcome challenges together.</p>
+                    <button class="play-button" data-game="team-strategy">Play Now</button>
+                </div>
+
+                <!-- Mindfulness Quest -->
+                <div class="game-card">
+                    <div class="game-icon">
+                        <i class="fas fa-peace"></i>
+                    </div>
+                    <h3 class="game-title">Mindfulness Quest</h3>
+                    <p class="game-description">Embark on a journey of self-discovery through guided mindfulness exercises and games.</p>
+                    <button class="play-button" data-game="mindfulness-quest">Play Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
@@ -3018,7 +3257,235 @@
         </div>
     </footer>
 
+    <!-- Game Modal -->
+    <div class="modal" id="gameModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="gameModalTitle"></h2>
+                <button class="close-btn" id="closeGameModal">&times;</button>
+            </div>
+            <div id="gameContainer"></div>
+        </div>
+    </div>
+
     <script>
+        // Initialize games functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup game buttons
+            const gameButtons = document.querySelectorAll('.play-button');
+            gameButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const gameType = this.getAttribute('data-game');
+                    startGame(gameType);
+                });
+            });
+
+            // Setup game modal
+            const gameModal = document.getElementById('gameModal');
+            const closeGameModal = document.getElementById('closeGameModal');
+            
+            closeGameModal.addEventListener('click', function() {
+                gameModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(e) {
+                if (e.target === gameModal) {
+                    gameModal.style.display = 'none';
+                }
+            });
+        });
+
+        // Game state management
+        const gameState = {
+            currentGame: null,
+            score: 0,
+            level: 1,
+            scenarios: {
+                'peer-pressure': [
+                    {
+                        situation: "At a party, someone offers you a drink you're not comfortable with.",
+                        choices: [
+                            { text: "Politely decline and suggest an alternative", correct: true },
+                            { text: "Take it to avoid awkwardness", correct: false },
+                            { text: "Make an excuse and leave", correct: true }
+                        ]
+                    },
+                    {
+                        situation: "Your friends are planning to skip class to go to the mall.",
+                        choices: [
+                            { text: "Go with them to maintain friendship", correct: false },
+                            { text: "Tell them you prefer to stay in class", correct: true },
+                            { text: "Try to convince them to stay", correct: true }
+                        ]
+                    },
+                    {
+                        situation: "Someone asks to copy your homework before class.",
+                        choices: [
+                            { text: "Let them copy to be helpful", correct: false },
+                            { text: "Refuse and offer to help them learn", correct: true },
+                            { text: "Tell them it's not fair to either of us", correct: true }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        function startGame(gameType) {
+            if (!appState.userTeam) {
+                alert('Please join a team first to play games!');
+                return;
+            }
+
+            gameState.currentGame = gameType;
+            gameState.score = 0;
+            gameState.level = 1;
+
+            const gameModal = document.getElementById('gameModal');
+            const gameModalTitle = document.getElementById('gameModalTitle');
+            const gameContainer = document.getElementById('gameContainer');
+
+            // Set game title
+            gameModalTitle.textContent = getGameTitle(gameType);
+
+            // Initialize game content
+            gameContainer.innerHTML = generateGameContent(gameType);
+
+            // Show modal
+            gameModal.style.display = 'block';
+
+            // Initialize specific game
+            initializeGameLogic(gameType);
+        }
+
+        function getGameTitle(gameType) {
+            const titles = {
+                'peer-pressure': 'Peer Pressure Simulator',
+                'decision-maker': 'Decision Maker',
+                'emotion-explorer': 'Emotion Explorer',
+                'confidence-builder': 'Confidence Builder',
+                'team-strategy': 'Team Strategy',
+                'mindfulness-quest': 'Mindfulness Quest'
+            };
+            return titles[gameType] || 'Game';
+        }
+
+        function generateGameContent(gameType) {
+            switch(gameType) {
+                case 'peer-pressure':
+                    return `
+                        <div class="game-interface">
+                            <div class="scenario-text"></div>
+                            <div class="choice-buttons"></div>
+                            <div class="game-feedback"></div>
+                            <div class="game-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <div class="score">Score: <span>0</span></div>
+                            </div>
+                        </div>
+                    `;
+                // Add other game types here
+                default:
+                    return `
+                        <div class="game-interface">
+                            <h3>Coming Soon!</h3>
+                            <p>This game is currently under development. Check back later!</p>
+                        </div>
+                    `;
+            }
+        }
+
+        function initializeGameLogic(gameType) {
+            switch(gameType) {
+                case 'peer-pressure':
+                    initializePeerPressureGame();
+                    break;
+                // Add other game initializations here
+            }
+        }
+
+        function initializePeerPressureGame() {
+            const scenarios = gameState.scenarios['peer-pressure'];
+            let currentScenarioIndex = 0;
+
+            function showScenario(index) {
+                const scenario = scenarios[index];
+                const container = document.querySelector('.game-interface');
+                
+                container.querySelector('.scenario-text').textContent = scenario.situation;
+                
+                const choiceButtons = container.querySelector('.choice-buttons');
+                choiceButtons.innerHTML = '';
+                
+                scenario.choices.forEach((choice, idx) => {
+                    const button = document.createElement('button');
+                    button.className = 'choice-btn';
+                    button.textContent = choice.text;
+                    button.addEventListener('click', () => makeChoice(choice, idx));
+                    choiceButtons.appendChild(button);
+                });
+
+                // Update progress bar
+                const progress = ((index + 1) / scenarios.length) * 100;
+                container.querySelector('.progress-fill').style.width = `${progress}%`;
+            }
+
+            function makeChoice(choice, choiceIndex) {
+                const container = document.querySelector('.game-interface');
+                const feedback = container.querySelector('.game-feedback');
+                
+                if (choice.correct) {
+                    gameState.score += 10;
+                    feedback.innerHTML = `
+                        <div class="feedback-correct">
+                            <i class="fas fa-check-circle"></i>
+                            Great choice! That's a positive way to handle the situation.
+                        </div>
+                    `;
+                } else {
+                    feedback.innerHTML = `
+                        <div class="feedback-incorrect">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Think about a more positive way to handle this situation.
+                        </div>
+                    `;
+                }
+
+                // Update score display
+                container.querySelector('.score span').textContent = gameState.score;
+
+                // Move to next scenario
+                setTimeout(() => {
+                    currentScenarioIndex++;
+                    if (currentScenarioIndex < scenarios.length) {
+                        showScenario(currentScenarioIndex);
+                    } else {
+                        endGame();
+                    }
+                }, 1500);
+            }
+
+            function endGame() {
+                const container = document.querySelector('.game-interface');
+                container.innerHTML = `
+                    <div class="game-end">
+                        <h3>Game Complete!</h3>
+                        <p>Final Score: ${gameState.score}</p>
+                        <p>Points earned for your team: ${gameState.score}</p>
+                        <button class="btn" onclick="startGame('peer-pressure')">Play Again</button>
+                    </div>
+                `;
+
+                // Add points to user's total
+                appState.points += gameState.score;
+                updatePersonalStats();
+            }
+
+            // Start the game with first scenario
+            showScenario(0);
+        }
         // ===== DATA STORAGE =====
         const appState = {
             userTeam: null,
@@ -3627,6 +4094,180 @@
                         
                         document.getElementById('dialogueSimulation').style.display = 'none';
                         feedbackBox.style.display = 'block';
+                        
+                        // Game functionality
+                        function startGame(gameType) {
+                            if (!appState.userTeam) {
+                                alert('Please join a team first to play games!');
+                                return;
+                            }
+
+                            const gameData = {
+                                'peer-pressure': {
+                                    title: 'Peer Pressure Simulator',
+                                    description: 'Navigate through real-life scenarios',
+                                    points: 50
+                                },
+                                'decision-maker': {
+                                    title: 'Decision Maker',
+                                    description: 'Quick decision challenges',
+                                    points: 30
+                                },
+                                'emotion-explorer': {
+                                    title: 'Emotion Explorer',
+                                    description: 'Identify and understand emotions',
+                                    points: 25
+                                },
+                                'confidence-builder': {
+                                    title: 'Confidence Builder',
+                                    description: 'Build your self-confidence',
+                                    points: 35
+                                },
+                                'team-strategy': {
+                                    title: 'Team Strategy',
+                                    description: 'Collaborative problem-solving',
+                                    points: 45
+                                },
+                                'mindfulness-quest': {
+                                    title: 'Mindfulness Quest',
+                                    description: 'Practice mindfulness techniques',
+                                    points: 30
+                                }
+                            };
+
+                            const game = gameData[gameType];
+                            if (!game) return;
+
+                            const modal = document.getElementById('challengeModal');
+                            const modalTitle = document.getElementById('modalTitle');
+                            const modalDescription = document.getElementById('modalDescription');
+                            const pointsValue = document.getElementById('pointsValue');
+
+                            modalTitle.textContent = game.title;
+                            modalDescription.textContent = game.description;
+                            pointsValue.textContent = `+${game.points}`;
+
+                            // Show game-specific content
+                            const interactiveChallenge = document.getElementById('interactiveChallenge');
+                            interactiveChallenge.innerHTML = generateGameContent(gameType);
+                            
+                            // Show the modal
+                            modal.style.display = 'block';
+                            document.getElementById('challengeContent').style.display = 'none';
+                            interactiveChallenge.style.display = 'block';
+
+                            // Initialize game
+                            initializeGame(gameType);
+                        }
+
+                        function generateGameContent(gameType) {
+                            switch(gameType) {
+                                case 'peer-pressure':
+                                    return `
+                                        <div class="game-interface">
+                                            <div class="scenario-text"></div>
+                                            <div class="choice-buttons"></div>
+                                            <div class="feedback-text"></div>
+                                            <div class="progress-indicator"></div>
+                                        </div>
+                                    `;
+                                case 'decision-maker':
+                                    return `
+                                        <div class="game-interface">
+                                            <div class="timer">30</div>
+                                            <div class="situation-card"></div>
+                                            <div class="decision-buttons"></div>
+                                            <div class="score-display">Score: 0</div>
+                                        </div>
+                                    `;
+                                // Add more game interfaces as needed
+                                default:
+                                    return `<div class="game-interface">Game coming soon!</div>`;
+                            }
+                        }
+
+                        function initializeGame(gameType) {
+                            const gameInterface = document.querySelector('.game-interface');
+                            
+                            switch(gameType) {
+                                case 'peer-pressure':
+                                    initializePeerPressureGame(gameInterface);
+                                    break;
+                                case 'decision-maker':
+                                    initializeDecisionMakerGame(gameInterface);
+                                    break;
+                                // Add more game initializations
+                            }
+                        }
+
+                        function initializePeerPressureGame(interface) {
+                            const scenarios = [
+                                {
+                                    situation: "At a party, someone offers you a drink you're not comfortable with.",
+                                    choices: [
+                                        { text: "Politely decline and suggest an alternative", correct: true },
+                                        { text: "Take it to avoid awkwardness", correct: false },
+                                        { text: "Make an excuse and leave", correct: true }
+                                    ]
+                                },
+                                // Add more scenarios
+                            ];
+
+                            let currentScenario = 0;
+                            showScenario(scenarios[currentScenario]);
+
+                            function showScenario(scenario) {
+                                interface.querySelector('.scenario-text').textContent = scenario.situation;
+                                const choiceButtons = interface.querySelector('.choice-buttons');
+                                choiceButtons.innerHTML = '';
+                                
+                                scenario.choices.forEach(choice => {
+                                    const button = document.createElement('button');
+                                    button.className = 'choice-btn';
+                                    button.textContent = choice.text;
+                                    button.onclick = () => makeChoice(choice);
+                                    choiceButtons.appendChild(button);
+                                });
+                            }
+
+                            function makeChoice(choice) {
+                                const feedback = interface.querySelector('.feedback-text');
+                                feedback.textContent = choice.correct ? 
+                                    "Great choice! That's a healthy way to handle peer pressure!" :
+                                    "Consider how this choice might affect you. There are better ways to handle this situation.";
+                                
+                                currentScenario++;
+                                if (currentScenario < scenarios.length) {
+                                    setTimeout(() => showScenario(scenarios[currentScenario]), 2000);
+                                } else {
+                                    endGame();
+                                }
+                            }
+                        }
+
+                        function initializeDecisionMakerGame(interface) {
+                            let timeLeft = 30;
+                            let score = 0;
+                            const timer = interface.querySelector('.timer');
+                            const scoreDisplay = interface.querySelector('.score-display');
+
+                            const interval = setInterval(() => {
+                                timeLeft--;
+                                timer.textContent = timeLeft;
+                                if (timeLeft <= 0) {
+                                    clearInterval(interval);
+                                    endGame();
+                                }
+                            }, 1000);
+
+                            function endGame() {
+                                clearInterval(interval);
+                                alert(`Game Over! Score: ${score}`);
+                                // Add points to user's total
+                                appState.points += score;
+                                updatePersonalStats();
+                            }
+                        }
                         
                         if (!completedRoles.includes(currentRole)) {
                             completedRoles.push(currentRole);
