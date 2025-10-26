@@ -442,11 +442,13 @@
 
         .modal-content {
             background-color: var(--white);
-            margin: 10% auto;
+            margin: 5% auto;
             padding: 2rem;
             border-radius: 15px;
             width: 90%;
             max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             animation: slideUp 0.3s ease;
         }
@@ -748,6 +750,322 @@
             color: var(--white);
         }
 
+        /* New Roleplay System Styles */
+        .roleplay-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .roleplay-container h4 {
+            color: var(--primary);
+            font-size: 1.1em;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Scenario Selector */
+        .scenario-selector-box {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .scenario-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .scenario-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scenario-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .scenario-card.selected {
+            background: linear-gradient(135deg, var(--primary) 0%, #764ba2 100%);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .scenario-card.selected h5,
+        .scenario-card.selected p {
+            color: white;
+        }
+
+        .scenario-difficulty {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .scenario-difficulty.easy {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .scenario-difficulty.medium {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .scenario-difficulty.hard {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .scenario-card h5 {
+            color: var(--primary);
+            font-size: 1em;
+            margin: 0.5rem 0;
+        }
+
+        .scenario-card p {
+            color: #666;
+            font-size: 0.9em;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Role Card Selector */
+        .role-card-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .role-card {
+            background-color: var(--light);
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .role-card.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .role-card i {
+            font-size: 2.5em;
+            display: block;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .role-card.selected i {
+            color: white;
+        }
+
+        .role-card h5 {
+            margin: 0.5rem 0;
+            font-size: 1.1em;
+        }
+
+        .role-card p {
+            color: #666;
+            font-size: 0.9em;
+            margin: 0;
+        }
+
+        .role-card.selected p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Dialogue Display */
+        .dialogue-container {
+            background-color: var(--light);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .dialogue-exchange {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .dialogue-line {
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .dialogue-line.pressurer-line {
+            background-color: #ffe5e5;
+            border-left-color: #dc3545;
+        }
+
+        .dialogue-line.target-line {
+            background-color: #e5f3ff;
+            border-left-color: var(--primary);
+            margin-left: 2rem;
+        }
+
+        .dialogue-line.bystander-line {
+            background-color: #e5ffe5;
+            border-left-color: #28a745;
+            margin-left: 1rem;
+        }
+
+        .speaker-label {
+            font-weight: 700;
+            color: #333;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.95em;
+        }
+
+        .speaker-text {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Feedback Box */
+        .feedback-content {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f5e6ff 100%);
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .feedback-message {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .tips-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border: 1px solid var(--light);
+        }
+
+        .tips-box h5 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .tips-box ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .tips-box li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Confidence Rating */
+        .confidence-rating {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .confidence-rating label {
+            display: block;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .rating-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .rating-btn {
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .rating-btn:hover {
+            border-color: var(--primary);
+            background-color: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .rating-btn.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Role Rotation */
+        .role-rotation {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .role-rotation p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .role-rotation strong {
+            color: var(--primary);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d !important;
+            color: white !important;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268 !important;
+        }
+
+        .btn-secondary:disabled {
+            background-color: #28a745 !important;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
         .dialogue-box {
             background-color: var(--white);
             padding: 1.5rem;
@@ -824,6 +1142,190 @@
             padding: 1rem;
             resize: vertical;
             font-family: inherit;
+        }
+
+        /* Creative Photo Challenge Styles */
+        .creative-photo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .prompt-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .prompt-box p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .prompt-box strong {
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .photo-upload-section {
+            margin: 2rem 0;
+        }
+
+        .upload-area {
+            border: 3px dashed var(--primary);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            background-color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--accent);
+            background-color: #f0f4ff;
+        }
+
+        .upload-placeholder {
+            pointer-events: none;
+        }
+
+        .upload-placeholder p {
+            margin: 0.5rem 0;
+            color: #666;
+        }
+
+        #photoPreview {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        #previewImg {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+
+        /* Quiz Timer Styles */
+        .quiz-timer {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 0.8rem 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timer-value {
+            font-size: 1.2rem;
+            font-family: 'Courier New', monospace;
+            color: var(--accent);
+        }
+
+        .quiz-progress {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .quiz-progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-progress-fill {
+            height: 100%;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .quiz-progress-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .quiz-score-display {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .quiz-score-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-score-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .quiz-results.show-results {
+            display: block !important;
+        }
+
+        .results-bar {
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            margin: 1rem 0;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .myth-bar, .fact-bar {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        .myth-bar {
+            background-color: var(--danger);
+            width: 35%;
+        }
+
+        .fact-bar {
+            background-color: var(--success);
+            width: 65%;
         }
 
         /* Vent Wall Section */
@@ -2300,6 +2802,20 @@
                 <p>Get smarter in 30 seconds with our daily quizzes</p>
             </div>
             <div class="quiz-container">
+                <div class="quiz-timer">
+                    <i class="fas fa-clock"></i>
+                    <span class="timer-value" id="quizTimer">30</span>s
+                </div>
+                
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="quizProgressFill" style="width: 33%;"></div>
+                    </div>
+                    <div class="quiz-progress-text">
+                        Question <span id="currentQuizNum">1</span> of <span id="totalQuizNum">3</span>
+                    </div>
+                </div>
+
                 <div class="quiz-question" id="quiz-question">
                     MYTH OR FACT: Vaping is just harmless water vapor.
                 </div>
@@ -2310,11 +2826,16 @@
                 <div class="quiz-results" id="quiz-results">
                     <h3>Class Results</h3>
                     <div class="results-bar">
-                        <div class="myth-bar">35% MYTH</div>
-                        <div class="fact-bar">65% FACT</div>
+                        <div class="myth-bar" id="mythPercentage">35% MYTH</div>
+                        <div class="fact-bar" id="factPercentage">65% FACT</div>
                     </div>
-                    <p><strong>Correct Answer: MYTH</strong></p>
-                    <p>Vaping aerosol is not harmless water vapor. It contains harmful chemicals and ultrafine particles that can be inhaled deep into the lungs.</p>
+                    <p><strong id="correctAnswerText">Correct Answer: MYTH</strong></p>
+                    <p id="explanationText">Vaping aerosol is not harmless water vapor. It contains harmful chemicals and ultrafine particles that can be inhaled deep into the lungs.</p>
+                </div>
+
+                <div class="quiz-score-display">
+                    <div class="quiz-score-label">Your Quiz Score</div>
+                    <div class="quiz-score-value" id="quizScoreValue">0</div>
                 </div>
             </div>
         </div>
@@ -2628,57 +3149,104 @@
         const challenges = [
             {
                 id: 1,
-                title: 'The 15-Min Unplug',
+                title: 'Stress-Busting Doodle',
                 points: 25,
-                type: 'timer',
-                description: 'Log a 15-minute activity without your phone. Draw, walk, talk to a family member. Your brain will thank you.',
+                type: 'creative-photo',
+                description: 'Draw or create your own stress-busting artwork! Take a picture of your creation and share it.',
                 steps: [
-                    'Select an activity below',
-                    'Put your phone away completely',
-                    'Start the timer and complete your activity',
-                    'When time is up, submit your evidence'
+                    'Create your artwork (draw, paint, collage, etc.)',
+                    'Take a clear photo of your finished creation',
+                    'Upload the photo as evidence',
+                    'Share what you created and how it helped you'
                 ],
-                icon: 'fas fa-mobile-alt',
-                activities: [
-                    { name: 'Draw', icon: 'fas fa-paintbrush' },
-                    { name: 'Walk', icon: 'fas fa-person-walking' },
-                    { name: 'Read', icon: 'fas fa-book' },
-                    { name: 'Chat', icon: 'fas fa-comments' }
-                ]
+                icon: 'fas fa-palette',
+                prompt: 'Show us your stress-busting masterpiece!'
             },
             {
                 id: 2,
-                title: 'The "No" Scenario',
+                title: 'The "No" Scenario Role-Play',
                 points: 50,
                 type: 'roleplay',
-                description: 'A 3-person in-app role-play. Be the "pressurer," "target," or "supportive bystander" to practice saying no.',
+                description: 'Practice refusing unwanted requests! Experience all 3 roles: Pressurer, Target, and Supportive Bystander. Build confidence in saying "no".',
                 steps: [
-                    'Choose your role in the scenario',
-                    'Read the dialogue and understand your part',
-                    'Respond with your role-play dialogue',
-                    'Complete all dialogue exchanges'
+                    'Choose a realistic scenario',
+                    'Select your role (Pressurer, Target, or Bystander)',
+                    'Engage in the dialogue',
+                    'Rate your confidence and get personalized feedback',
+                    'Rotate roles to experience all perspectives'
                 ],
-                icon: 'fas fa-user-friends',
-                roles: ['Pressurer', 'Target', 'Supportive Bystander']
+                icon: 'fas fa-users',
+                scenarios: [
+                    {
+                        id: 's1',
+                        title: 'The Party Pressure',
+                        context: 'A friend is pressuring you to try something at a party.',
+                        pressurer: 'Come on, everyone\'s doing it. Just one time! It\'s not a big deal.',
+                        target: 'I\'m not comfortable with that. I\'ll pass and stick with what I\'m okay with.',
+                        bystander: 'Yeah, it\'s totally okay to say no. Let\'s do something else instead!',
+                        difficulty: 'easy'
+                    },
+                    {
+                        id: 's2',
+                        title: 'The Academic Shortcut',
+                        context: 'A classmate wants you to help them cheat on an assignment.',
+                        pressurer: 'I\'ll fail if you don\'t help. Just let me copy your work, no one will know!',
+                        target: 'I can\'t do that. I care about my integrity, and I want you to learn too.',
+                        bystander: 'Cheating could get you expelled. Let\'s help you study instead!',
+                        difficulty: 'medium'
+                    },
+                    {
+                        id: 's3',
+                        title: 'The Social Media Trap',
+                        context: 'Someone wants you to share embarrassing content about a friend.',
+                        pressurer: 'It\'s just a meme! Everyone\'s sharing it. Don\'t be lame!',
+                        target: 'That would hurt them. I\'m not going to post anything that mocks my friend.',
+                        bystander: 'Actually, that\'s not cool. How would you feel if they did that to you?',
+                        difficulty: 'medium'
+                    },
+                    {
+                        id: 's4',
+                        title: 'The Risky Substance',
+                        context: 'Someone is pressuring you to use drugs or substances.',
+                        pressurer: 'Why not try it? What\'s the worst that could happen? I do it all the time.',
+                        target: 'No. I know the risks, and I\'m protecting my health. That\'s my boundary.',
+                        bystander: 'That takes guts to say no. I respect that decision.',
+                        difficulty: 'hard'
+                    },
+                    {
+                        id: 's5',
+                        title: 'The Loyalty Test',
+                        context: 'A friend wants you to keep a secret that could hurt someone.',
+                        pressurer: 'You said you\'d keep this secret. Friends don\'t tell on each other!',
+                        target: 'I care about you, but I can\'t stay silent if someone\'s being hurt. That\'s not loyalty, that\'s complicity.',
+                        bystander: 'Real friendship means doing what\'s right, even when it\'s hard.',
+                        difficulty: 'hard'
+                    },
+                    {
+                        id: 's6',
+                        title: 'The Boundary Invasion',
+                        context: 'Someone is ignoring your personal boundaries.',
+                        pressurer: 'Why are you being so uptight? I\'m just teasing! Lighten up!',
+                        target: 'I\'ve told you this bothers me. Please respect my boundaries.',
+                        bystander: 'Hey, they said stop. That means stop. Respect goes both ways.',
+                        difficulty: 'medium'
+                    }
+                ]
             },
             {
                 id: 3,
-                title: 'Creative Outlet',
+                title: 'Positive Affirmation Poster',
                 points: 30,
-                type: 'comic',
-                description: 'Use our 3-panel comic creator to show a moment of stress and a positive response.',
+                type: 'creative-photo',
+                description: 'Design and create a powerful affirmation poster. Photograph it and share your positive message with the community!',
                 steps: [
-                    'Panel 1: Describe a stressful moment',
-                    'Panel 2: Show your coping strategy',
-                    'Panel 3: Show the positive outcome',
-                    'Add a final reflection'
+                    'Design a poster with affirmations or positive messages',
+                    'Use markers, paint, digital tools, or mixed media',
+                    'Take a photo of your poster',
+                    'Upload and share the affirmation you need most'
                 ],
-                icon: 'fas fa-paint-brush',
-                panels: [
-                    { title: 'Panel 1: The Stressful Moment', placeholder: 'What happened? Describe the stress...' },
-                    { title: 'Panel 2: My Coping Strategy', placeholder: 'What did you do to cope? How did you respond?' },
-                    { title: 'Panel 3: The Positive Outcome', placeholder: 'What was the result? How did it help?' }
-                ]
+                icon: 'fas fa-certificate',
+                prompt: 'Display your powerful affirmation poster!'
             }
         ];
 
@@ -2745,9 +3313,9 @@
                         return;
                     }
                 } else if (challenge.type === 'roleplay') {
-                    const reflectionText = document.getElementById('reflectionText');
-                    if (!reflectionText || !reflectionText.value.trim()) {
-                        alert('Please write your reflection about the role-play!');
+                    const feedbackText = document.getElementById('roleplayFeedback');
+                    if (!feedbackText || !feedbackText.textContent.includes('Feedback')) {
+                        alert('Please complete the role-play and view your feedback!');
                         return;
                     }
                 } else if (challenge.type === 'comic') {
@@ -2757,6 +3325,17 @@
                             alert('Please complete all three comic panels!');
                             return;
                         }
+                    }
+                } else if (challenge.type === 'creative-photo') {
+                    const photoInput = document.getElementById('creativePhotoUpload');
+                    const reflectionText = document.getElementById('creativeReflection');
+                    if (!photoInput || !photoInput.files || photoInput.files.length === 0) {
+                        alert('Please upload a photo of your creation!');
+                        return;
+                    }
+                    if (!reflectionText || !reflectionText.value.trim()) {
+                        alert('Please share your reflection about your creative work!');
+                        return;
                     }
                 }
 
@@ -2819,6 +3398,8 @@
                 renderRoleplayChallenge(challenge, challengeContent, interactiveChallenge);
             } else if (challenge.type === 'comic') {
                 renderComicChallenge(challenge, challengeContent, interactiveChallenge);
+            } else if (challenge.type === 'creative-photo') {
+                renderCreativePhotoChallenge(challenge, challengeContent, interactiveChallenge);
             }
 
             // Reset evidence selection
@@ -2922,41 +3503,77 @@
         }
 
         function renderRoleplayChallenge(challenge, challengeContent, interactiveChallenge) {
-            const scenarios = {
-                'Pressurer': `"Hey, everyone's going to the party tonight. You should come. They have some stuff to try." 
-                    <br><br>Your task: Try to pressure someone to do something risky.`,
-                'Target': `Someone offers you a vape at a party. You want to fit in but you're not sure.
-                    <br><br>Your task: Practice saying no and explaining your decision.`,
-                'Supportive Bystander': `You see a friend being pressured to try drugs. They look uncomfortable.
-                    <br><br>Your task: Intervene and support your friend.`
-            };
-
-            const responses = {
-                'Pressurer': 'I\'d suggest: "Come on, just try it once. It\'s not a big deal. What could go wrong?"',
-                'Target': 'I\'d say: "Thanks, but no thanks. I need to take care of my health. Let\'s do something else instead."',
-                'Supportive Bystander': 'I\'d tell my friend: "You don\'t have to do anything you\'re not comfortable with. Want to get some air with me?"'
-            };
-
-            let selectedRole = null;
+            let currentScenario = null;
+            let currentRole = null;
+            let completedRoles = [];
+            let roleResponses = {};
 
             const html = `
-                <h3>Choose Your Role</h3>
-                <div class="role-selector" id="roleSelector">
-                    ${challenge.roles.map(role => 
-                        `<button class="role-btn" data-role="${role}">${role}</button>`
-                    ).join('')}
-                </div>
-                
-                <div id="scenarioContent" style="display: none;">
-                    <div class="scenario-container">
-                        <div class="scenario-text" id="scenarioText"></div>
-                        <div class="dialogue-box">
-                            <div class="dialogue-speaker">Suggested Response:</div>
-                            <div class="dialogue-text" id="dialogueResponse"></div>
+                <h3>🎭 The "No" Scenario Role-Play</h3>
+                <div class="roleplay-container">
+                    <!-- Scenario Selector -->
+                    <div class="scenario-selector-box" id="scenarioSelector">
+                        <h4>Step 1: Choose a Scenario</h4>
+                        <div class="scenario-list">
+                            ${challenge.scenarios.map(scenario => `
+                                <div class="scenario-card" data-scenario-id="${scenario.id}">
+                                    <div class="scenario-difficulty ${scenario.difficulty}">${scenario.difficulty}</div>
+                                    <h5>${scenario.title}</h5>
+                                    <p>${scenario.context}</p>
+                                </div>
+                            `).join('')}
                         </div>
-                        <div class="reflection-box">
-                            <label>Your Reflection (How did that feel? What did you learn?)</label>
-                            <textarea id="reflectionText" placeholder="Share your thoughts..."></textarea>
+                    </div>
+
+                    <!-- Role Selection -->
+                    <div id="roleSelection" style="display: none;">
+                        <h4>Step 2: Choose Your Role</h4>
+                        <div class="role-card-selector">
+                            <div class="role-card" data-role="Pressurer">
+                                <i class="fas fa-hand-fist"></i>
+                                <h5>Pressurer</h5>
+                                <p>You're trying to convince them to do something risky.</p>
+                            </div>
+                            <div class="role-card" data-role="Target">
+                                <i class="fas fa-shield-alt"></i>
+                                <h5>Target</h5>
+                                <p>You're practicing saying "no" confidently.</p>
+                            </div>
+                            <div class="role-card" data-role="Bystander">
+                                <i class="fas fa-hand-holding-heart"></i>
+                                <h5>Supportive Bystander</h5>
+                                <p>You're backing up the target's boundaries.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dialogue Simulation -->
+                    <div id="dialogueSimulation" style="display: none;">
+                        <h4>Step 3: Experience the Dialogue</h4>
+                        <div class="dialogue-container">
+                            <div class="dialogue-flow" id="dialogueFlow"></div>
+                        </div>
+                        <button class="btn" id="viewFeedbackBtn" style="width: 100%; margin-top: 1.5rem;">💭 View Feedback & Rate Your Confidence</button>
+                    </div>
+
+                    <!-- Feedback & Rating -->
+                    <div id="feedbackBox" style="display: none;">
+                        <h4>Step 4: Reflection & Confidence Rating</h4>
+                        <div class="feedback-content" id="roleplayFeedback"></div>
+                        
+                        <div class="confidence-rating">
+                            <label>How confident did you feel in this role?</label>
+                            <div class="rating-buttons">
+                                <button class="rating-btn" data-rating="1">😟 Not Confident</button>
+                                <button class="rating-btn" data-rating="2">😐 Somewhat</button>
+                                <button class="rating-btn" data-rating="3">😊 Confident</button>
+                                <button class="rating-btn" data-rating="4">💪 Very Confident</button>
+                            </div>
+                        </div>
+
+                        <div class="role-rotation">
+                            <p>Want to try another role? Completed: <strong id="completedRolesList"></strong></p>
+                            <button class="btn btn-secondary" id="rotateRoleBtn" style="width: 100%; margin-top: 1rem;">🔄 Try Another Role</button>
                         </div>
                     </div>
                 </div>
@@ -2966,17 +3583,158 @@
             interactiveChallenge.style.display = 'block';
             interactiveChallenge.innerHTML = html;
 
-            document.querySelectorAll('.role-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    selectedRole = this.getAttribute('data-role');
-                    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('selected'));
-                    this.classList.add('selected');
+            // Setup event listeners after DOM is rendered
+            setupRoleplayEvents();
 
-                    document.getElementById('scenarioText').innerHTML = scenarios[selectedRole];
-                    document.getElementById('dialogueResponse').innerHTML = responses[selectedRole];
-                    document.getElementById('scenarioContent').style.display = 'block';
+            function setupRoleplayEvents() {
+                // Scenario Selection
+                const scenarioCards = document.querySelectorAll('.scenario-card');
+                scenarioCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        const scenarioId = this.getAttribute('data-scenario-id');
+                        currentScenario = challenge.scenarios.find(s => s.id === scenarioId);
+                        
+                        scenarioCards.forEach(c => c.classList.remove('selected'));
+                        this.classList.add('selected');
+                        
+                        document.getElementById('scenarioSelector').style.display = 'none';
+                        document.getElementById('roleSelection').style.display = 'block';
+                    });
                 });
-            });
+
+                // Role Selection
+                const roleCards = document.querySelectorAll('.role-card');
+                roleCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        currentRole = this.getAttribute('data-role');
+                        
+                        roleCards.forEach(c => c.classList.remove('selected'));
+                        this.classList.add('selected');
+                        
+                        displayDialogue();
+                    });
+                });
+
+                // View Feedback Button
+                const feedbackBtn = document.getElementById('viewFeedbackBtn');
+                if (feedbackBtn) {
+                    feedbackBtn.addEventListener('click', function() {
+                        const feedbackBox = document.getElementById('feedbackBox');
+                        const feedbackContent = document.getElementById('roleplayFeedback');
+                        
+                        const feedback = generateFeedback(currentRole, currentScenario);
+                        feedbackContent.innerHTML = feedback;
+                        
+                        document.getElementById('dialogueSimulation').style.display = 'none';
+                        feedbackBox.style.display = 'block';
+                        
+                        if (!completedRoles.includes(currentRole)) {
+                            completedRoles.push(currentRole);
+                        }
+                        updateCompletedRoles();
+                    });
+                }
+
+                // Confidence Rating
+                const ratingBtns = document.querySelectorAll('.rating-btn');
+                ratingBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const rating = this.getAttribute('data-rating');
+                        roleResponses[currentRole] = { scenario: currentScenario.id, rating: rating };
+                        
+                        ratingBtns.forEach(b => b.classList.remove('selected'));
+                        this.classList.add('selected');
+                    });
+                });
+
+                // Rotate Role Button
+                const rotateBtn = document.getElementById('rotateRoleBtn');
+                if (rotateBtn) {
+                    rotateBtn.addEventListener('click', function() {
+                        currentRole = null;
+                        document.getElementById('feedbackBox').style.display = 'none';
+                        document.getElementById('roleSelection').style.display = 'block';
+                        roleCards.forEach(c => c.classList.remove('selected'));
+                        ratingBtns.forEach(b => b.classList.remove('selected'));
+                    });
+                }
+            }
+
+            // Display Dialogue
+            function displayDialogue() {
+                const dialogueFlow = document.getElementById('dialogueFlow');
+                const lines = [
+                    { speaker: 'Pressurer', text: currentScenario.pressurer, class: 'pressurer-line' },
+                    { speaker: 'Target', text: currentScenario.target, class: 'target-line' },
+                    { speaker: 'Bystander', text: currentScenario.bystander, class: 'bystander-line' }
+                ];
+
+                let dialogueHtml = '<div class="dialogue-exchange">';
+                lines.forEach(line => {
+                    dialogueHtml += `<div class="dialogue-line ${line.class}">
+                        <span class="speaker-label">${line.speaker}:</span>
+                        <span class="speaker-text">"${line.text}"</span>
+                    </div>`;
+                });
+                dialogueHtml += '</div>';
+
+                dialogueFlow.innerHTML = dialogueHtml;
+                
+                document.getElementById('roleSelection').style.display = 'none';
+                document.getElementById('dialogueSimulation').style.display = 'block';
+            }
+
+            function updateCompletedRoles() {
+                const rolesList = document.getElementById('completedRolesList');
+                rolesList.textContent = completedRoles.length > 0 ? completedRoles.join(', ') : 'None yet';
+                
+                const allRoles = ['Pressurer', 'Target', 'Bystander'];
+                const remainingRoles = allRoles.filter(r => !completedRoles.includes(r));
+                
+                if (remainingRoles.length === 0) {
+                    const rotateBtn = document.getElementById('rotateRoleBtn');
+                    if (rotateBtn) {
+                        rotateBtn.textContent = '✅ Challenge Complete!';
+                        rotateBtn.disabled = true;
+                    }
+                }
+            }
+
+            function generateFeedback(role, scenario) {
+                const feedbackMap = {
+                    'Pressurer': {
+                        'easy': '✅ <strong>Pressurer Feedback:</strong><br>You tried to persuade them. In real life, people who say "no" clearly are harder to convince. This is why building confidence in your refusals is critical!',
+                        'medium': '⚡ <strong>Pressurer Feedback:</strong><br>You used moderate pressure tactics. This is realistic—real pressure is often subtle and persistent. The Target\'s response showed strength.',
+                        'hard': '🎯 <strong>Pressurer Feedback:</strong><br>You applied significant pressure. In these high-stakes scenarios, saying "no" requires conviction. Notice how the Target stood firm anyway?'
+                    },
+                    'Target': {
+                        'easy': '💪 <strong>Target Feedback:</strong><br>Great job saying no! Your response was clear and direct. You didn\'t over-explain or apologize. This is exactly how to maintain your boundary.',
+                        'medium': '🛡️ <strong>Target Feedback:</strong><br>Good work standing firm! You acknowledged their request but held your boundary. Next time, try not to justify your "no"—it\'s just your boundary.',
+                        'hard': '⭐ <strong>Target Feedback:</strong><br>Excellent! You stayed calm under pressure and used "I statements." Your conviction is your superpower here. Keep practicing!'
+                    },
+                    'Bystander': {
+                        'easy': '🤝 <strong>Bystander Feedback:</strong><br>You supported the Target by redirecting the situation. This kind of active bystanding can prevent peer pressure from escalating.',
+                        'medium': '❤️ <strong>Bystander Feedback:</strong><br>You offered both support and perspective. Good job validating their boundary while offering an alternative. This is powerful peer leadership.',
+                        'hard': '🌟 <strong>Bystander Feedback:</strong><br>You directly challenged the pressure tactic while affirming the Target. This courage can shift group dynamics and protect vulnerable peers.'
+                    }
+                };
+
+                const roleFeedback = feedbackMap[role] || feedbackMap['Target'];
+                const diffFeedback = roleFeedback[scenario.difficulty] || roleFeedback['easy'];
+                
+                const tips = `<div class="tips-box">
+                    <h5>💡 Improvement Tips:</h5>
+                    <ul>
+                        <li><strong>Use "I" statements:</strong> "I feel...", "I need...", "I decided..."</li>
+                        <li><strong>Stay calm:</strong> Emotions under pressure are valid, but clarity helps.</li>
+                        <li><strong>Repeat if needed:</strong> You can say "no" multiple times without explaining.</li>
+                        <li><strong>Offer alternatives:</strong> This shows you're not rejecting them, just the request.</li>
+                        <li><strong>Seek support:</strong> The Bystander role shows how allies can help.</li>
+                    </ul>
+                </div>`;
+
+                return `<div class="feedback-message">${diffFeedback}</div>${tips}`;
+            }
         }
 
         function renderComicChallenge(challenge, challengeContent, interactiveChallenge) {
@@ -3000,6 +3758,98 @@
             interactiveChallenge.style.display = 'block';
             interactiveChallenge.innerHTML = html;
         }
+
+        function renderCreativePhotoChallenge(challenge, challengeContent, interactiveChallenge) {
+            const html = `
+                <h3>${challenge.title}</h3>
+                <div class="creative-photo-container">
+                    <div class="prompt-box">
+                        <div style="font-size: 2em; margin-bottom: 1rem;">✨</div>
+                        <p style="font-size: 1.3em; font-weight: 700; margin: 0; letter-spacing: 0.5px;">${challenge.prompt}</p>
+                        <div style="height: 2px; background: rgba(255,255,255,0.3); margin: 1rem 0;"></div>
+                        <p style="color: rgba(255,255,255,0.95); font-size: 1em; margin: 0; font-weight: 500;">
+                            Create your artwork, then take a clear photo and upload it below.
+                        </p>
+                    </div>
+
+                    <div class="photo-upload-section">
+                        <div class="upload-area" id="uploadArea">
+                            <input type="file" id="creativePhotoUpload" accept="image/*" style="display: none;">
+                            <div class="upload-placeholder">
+                                <i class="fas fa-cloud-upload-alt" style="font-size: 3em; color: #007bff; margin-bottom: 1rem;"></i>
+                                <p style="font-size: 1.1em; font-weight: 600; color: #333;"><strong>📸 Click to upload your photo</strong></p>
+                                <p style="font-size: 0.95em; color: #666; margin-bottom: 1rem;">or drag and drop (JPG, PNG, GIF)</p>
+                                <button class="btn" style="margin-top: 1rem;" id="uploadBtn">🖼️ Choose Photo</button>
+                            </div>
+                            <div id="photoPreview" style="display: none; text-align: center; padding: 1rem;">
+                                <img id="previewImg" style="max-width: 100%; max-height: 300px; border-radius: 8px;">
+                                <p id="fileName" style="margin-top: 0.5rem; color: #666; font-weight: 500;"></p>
+                                <button class="btn btn-secondary" id="changePhotoBtn" style="margin-top: 0.5rem;">🔄 Change Photo</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reflection-box">
+                        <label><i class="fas fa-pen-fancy"></i> 💭 Tell us about your creation:</label>
+                        <textarea id="creativeReflection" placeholder="What did you create? How did making this help you? What does it mean to you?"></textarea>
+                    </div>
+                </div>
+            `;
+
+            challengeContent.style.display = 'none';
+            interactiveChallenge.style.display = 'block';
+            interactiveChallenge.innerHTML = html;
+
+            // Setup photo upload functionality
+            const fileInput = document.getElementById('creativePhotoUpload');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const uploadArea = document.getElementById('uploadArea');
+            const photoPreview = document.getElementById('photoPreview');
+            const previewImg = document.getElementById('previewImg');
+            const fileName = document.getElementById('fileName');
+            const changePhotoBtn = document.getElementById('changePhotoBtn');
+
+            uploadBtn.addEventListener('click', () => fileInput.click());
+
+            fileInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    displayPhoto(this.files[0]);
+                }
+            });
+
+            // Drag and drop
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.backgroundColor = '#e9ecef';
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.backgroundColor = '';
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.backgroundColor = '';
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                    fileInput.files = e.dataTransfer.files;
+                    displayPhoto(e.dataTransfer.files[0]);
+                }
+            });
+
+            changePhotoBtn.addEventListener('click', () => fileInput.click());
+
+            function displayPhoto(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    fileName.textContent = file.name;
+                    document.querySelector('.upload-placeholder').style.display = 'none';
+                    photoPreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
 
         // ===== VENT WALL FUNCTIONALITY =====
         function setupVentWall() {
@@ -3158,56 +4008,152 @@
             {
                 question: 'MYTH OR FACT: Vaping is just harmless water vapor.',
                 correct: 'myth',
-                explanation: 'Vaping aerosol is not harmless water vapor. It contains harmful chemicals and ultrafine particles that can be inhaled deep into the lungs.'
+                explanation: 'Vaping aerosol is not harmless water vapor. It contains harmful chemicals and ultrafine particles that can be inhaled deep into the lungs.',
+                mythPercent: 35,
+                factPercent: 65
             },
             {
                 question: 'MYTH OR FACT: One energy drink is equivalent to one cup of coffee.',
                 correct: 'myth',
-                explanation: 'Energy drinks often contain 2-10 times more caffeine than coffee and added sugars that spike blood pressure dangerously.'
+                explanation: 'Energy drinks often contain 2-10 times more caffeine than coffee and added sugars that spike blood pressure dangerously.',
+                mythPercent: 42,
+                factPercent: 58
             },
             {
                 question: 'MYTH OR FACT: Peer pressure only affects kids with low self-esteem.',
                 correct: 'myth',
-                explanation: 'Peer pressure affects everyone. Even confident people are influenced by their peers, which is a normal part of social development.'
+                explanation: 'Peer pressure affects everyone. Even confident people are influenced by their peers, which is a normal part of social development.',
+                mythPercent: 28,
+                factPercent: 72
+            },
+            {
+                question: 'MYTH OR FACT: Smoking just one cigarette can get you addicted.',
+                correct: 'fact',
+                explanation: 'Many people can become addicted to nicotine from their very first cigarette. Addiction depends on individual biology and frequency of use.',
+                mythPercent: 55,
+                factPercent: 45
+            },
+            {
+                question: 'MYTH OR FACT: Alcohol kills brain cells immediately.',
+                correct: 'myth',
+                explanation: 'While excessive alcohol can damage the brain over time, occasional moderate drinking doesn\'t directly kill brain cells. However, heavy drinking and binge drinking do cause damage.',
+                mythPercent: 68,
+                factPercent: 32
+            },
+            {
+                question: 'MYTH OR FACT: It\'s easier to quit vaping than smoking cigarettes.',
+                correct: 'myth',
+                explanation: 'Vaping is actually harder to quit for some people because it\'s easier to do frequently (no smell, less stigma), leading to higher nicotine dependence.',
+                mythPercent: 51,
+                factPercent: 49
             }
         ];
 
         let currentQuizIndex = 0;
+        let quizScore = 0;
+        let totalQuestionsAnswered = 0;
+        let quizTimer = null;
+        let timeRemaining = 30;
+        let answered = false;
 
         function setupQuiz() {
-            const nextBtn = document.createElement('button');
-            nextBtn.className = 'btn';
-            nextBtn.textContent = 'Next Question';
-            nextBtn.style.cssText = 'margin-top: 1rem; display: none;';
-            nextBtn.id = 'next-quiz-btn';
-            document.querySelector('.quiz-container').appendChild(nextBtn);
-
             document.querySelectorAll('.quiz-option').forEach(option => {
                 option.addEventListener('click', function() {
-                    handleQuizAnswer(this);
+                    if (!answered) {
+                        handleQuizAnswer(this);
+                    }
                 });
             });
+
+            // Start initial timer
+            startQuizTimer();
+            updateQuizDisplay();
+        }
+
+        function startQuizTimer() {
+            timeRemaining = 30;
+            updateTimerDisplay();
+
+            if (quizTimer) clearInterval(quizTimer);
+
+            quizTimer = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    clearInterval(quizTimer);
+                    if (!answered) {
+                        // Auto-show results if no answer was selected
+                        document.getElementById('quiz-results').classList.add('show-results');
+                        answered = true;
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const timerEl = document.getElementById('quizTimer');
+            timerEl.textContent = Math.max(0, timeRemaining);
+            
+            // Change color based on time remaining
+            if (timeRemaining <= 5) {
+                timerEl.style.color = 'var(--danger)';
+            } else if (timeRemaining <= 10) {
+                timerEl.style.color = 'var(--warning)';
+            } else {
+                timerEl.style.color = 'var(--accent)';
+            }
+        }
+
+        function updateQuizDisplay() {
+            const quiz = quizzes[currentQuizIndex];
+            const totalQuizzes = quizzes.length;
+            const progressPercent = ((currentQuizIndex) / totalQuizzes) * 100;
+
+            // Update progress bar
+            document.getElementById('quizProgressFill').style.width = (progressPercent + (100 / totalQuizzes)) + '%';
+            document.getElementById('currentQuizNum').textContent = currentQuizIndex + 1;
+            document.getElementById('totalQuizNum').textContent = totalQuizzes;
+
+            // Update question
+            document.getElementById('quiz-question').textContent = quiz.question;
+
+            // Update score display
+            document.getElementById('quizScoreValue').textContent = quizScore + '/' + totalQuestionsAnswered;
         }
 
         function handleQuizAnswer(selectedOption) {
+            if (answered) return;
+            answered = true;
+
             const answer = selectedOption.getAttribute('data-answer');
             const quiz = quizzes[currentQuizIndex];
             const results = document.getElementById('quiz-results');
             
-            // Show results
-            results.style.display = 'block';
-            
-            // Update explanation
-            document.querySelector('.quiz-results strong').textContent = 'Correct Answer: ' + quiz.correct.toUpperCase();
-            document.querySelector('.quiz-results p:nth-child(3)').textContent = quiz.explanation;
+            // Clear timer
+            if (quizTimer) clearInterval(quizTimer);
 
-            // Highlight correct/incorrect
-            const correctOption = document.querySelector(`.quiz-option[data-answer="${quiz.correct}"]`);
-            const incorrectOption = document.querySelector(`.quiz-option[data-answer="${quiz.correct === 'myth' ? 'fact' : 'myth'}"]`);
+            // Show results
+            results.classList.add('show-results');
             
+            // Update explanation and results
+            document.getElementById('correctAnswerText').textContent = 'Correct Answer: ' + quiz.correct.toUpperCase();
+            document.getElementById('explanationText').textContent = quiz.explanation;
+
+            // Update class results percentages
+            const mythBar = document.getElementById('mythPercentage');
+            const factBar = document.getElementById('factPercentage');
+            mythBar.style.width = quiz.mythPercent + '%';
+            factBar.style.width = quiz.factPercent + '%';
+            mythBar.textContent = quiz.mythPercent + '% MYTH';
+            factBar.textContent = quiz.factPercent + '% FACT';
+
+            // Track score
+            totalQuestionsAnswered++;
             if (answer === quiz.correct) {
                 selectedOption.style.backgroundColor = 'var(--success)';
                 selectedOption.style.color = 'var(--white)';
+                quizScore++;
                 if (appState.userTeam) {
                     appState.points += 10;
                     updatePersonalStats();
@@ -3217,32 +4163,69 @@
                 selectedOption.style.color = 'var(--white)';
             }
 
+            // Show correct answer
+            const correctOption = document.querySelector(`.quiz-option[data-answer="${quiz.correct}"]`);
             correctOption.style.backgroundColor = 'var(--success)';
             correctOption.style.color = 'var(--white)';
             
-            // Disable further clicks and show next button
+            // Disable further clicks
             document.querySelectorAll('.quiz-option').forEach(opt => {
                 opt.style.pointerEvents = 'none';
             });
 
-            const nextBtn = document.getElementById('next-quiz-btn');
+            // Show next button after 2 seconds
+            setTimeout(() => {
+                showNextQuizButton();
+            }, 2000);
+
+            // Update score display
+            updateQuizDisplay();
+        }
+
+        function showNextQuizButton() {
+            let nextBtn = document.getElementById('next-quiz-btn');
+            if (!nextBtn) {
+                nextBtn = document.createElement('button');
+                nextBtn.className = 'btn';
+                nextBtn.textContent = 'Next Question';
+                nextBtn.id = 'next-quiz-btn';
+                nextBtn.style.cssText = 'margin-top: 1.5rem; width: 100%;';
+                document.querySelector('.quiz-container').appendChild(nextBtn);
+                nextBtn.addEventListener('click', loadNextQuiz);
+            }
             nextBtn.style.display = 'block';
-            nextBtn.onclick = loadNextQuiz;
         }
 
         function loadNextQuiz() {
+            // Reset for next question
+            answered = false;
             currentQuizIndex = (currentQuizIndex + 1) % quizzes.length;
+            
             const quiz = quizzes[currentQuizIndex];
             
+            // Update question
             document.getElementById('quiz-question').textContent = quiz.question;
+            
+            // Reset options
             document.querySelectorAll('.quiz-option').forEach(opt => {
                 opt.style.backgroundColor = '';
                 opt.style.color = '';
                 opt.style.pointerEvents = 'auto';
             });
             
-            document.getElementById('quiz-results').style.display = 'none';
-            document.getElementById('next-quiz-btn').style.display = 'none';
+            // Hide results and next button
+            document.getElementById('quiz-results').classList.remove('show-results');
+            const nextBtn = document.getElementById('next-quiz-btn');
+            if (nextBtn) nextBtn.style.display = 'none';
+
+            // Update display and restart timer
+            updateQuizDisplay();
+            startQuizTimer();
+
+            // Update team points if joined
+            if (appState.userTeam) {
+                updateTeamDisplay();
+            }
         }
 
         // ===== ACHIEVEMENT SYSTEM =====
