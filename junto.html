@@ -168,6 +168,11 @@
             box-shadow: 0 6px 15px rgba(255, 109, 0, 0.3);
         }
 
+        .btn:active {
+            transform: translateY(-1px);
+            transition: transform 0.1s ease;
+        }
+
         .btn-secondary {
             background-color: transparent;
             border: 2px solid var(--white);
@@ -282,6 +287,12 @@
 
         .feature-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            transition: transform 0.3s ease;
         }
 
         .feature-icon {
@@ -321,13 +332,14 @@
             margin-top: 3rem;
         }
 
-        .step {
-            flex: 1;
-            text-align: center;
-            padding: 2rem;
-            background-color: var(--light);
-            border-radius: 10px;
-            position: relative;
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .step:hover .step-number {
+            transform: scale(1.1);
+            background-color: #e65100;
         }
 
         .step-number {
@@ -374,6 +386,12 @@
 
         .challenge-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .challenge-card:hover .points {
+            background-color: #e65100;
+            transform: scale(1.05);
         }
 
         .challenge-header {
@@ -835,6 +853,111 @@
             margin-bottom: 1rem;
         }
 
+        .vent-reactions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: var(--light);
+            border-radius: 8px;
+        }
+
+        .reaction-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            background-color: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .reaction-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .reaction-btn.active {
+            background-color: var(--accent);
+            color: var(--white);
+            border-color: var(--accent);
+            animation: pulse 0.3s ease;
+        }
+
+        .reaction-btn i {
+            font-size: 1rem;
+        }
+
+        .reaction-count {
+            font-weight: bold;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-50px) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes soundPulse {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .bounce-in {
+            animation: bounceIn 0.8s ease-out;
+        }
+
         .vent-comments-section {
             margin-top: 1.5rem;
             border-top: 1px solid #eee;
@@ -967,6 +1090,12 @@
         .quiz-option:hover {
             background-color: var(--primary);
             color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .quiz-option:active {
+            transform: translateY(0);
+            transition: transform 0.1s ease;
         }
 
         .quiz-results {
@@ -1073,7 +1202,180 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive Design */
+        /* Team Leaderboard Section */
+        .leaderboard {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+
+        .leaderboard-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .team-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .team-stat-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+        .red-team::before { background: linear-gradient(90deg, #f44336, #d32f2f); }
+        .blue-team::before { background: linear-gradient(90deg, #2196f3, #1976d2); }
+        .green-team::before { background: linear-gradient(90deg, #4caf50, #388e3c); }
+        .yellow-team::before { background: linear-gradient(90deg, #ff9800, #f57c00); }
+
+        .team-stat-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .team-stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .red-team .team-stat-icon { background: #ffebee; color: #f44336; }
+        .blue-team .team-stat-icon { background: #e3f2fd; color: #2196f3; }
+        .green-team .team-stat-icon { background: #e8f5e8; color: #4caf50; }
+        .yellow-team .team-stat-icon { background: #fff3e0; color: #ff9800; }
+
+        .team-stat-header h3 {
+            flex: 1;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .team-rank {
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .team-stat-body {
+            margin-bottom: 1rem;
+        }
+
+        .stat-points, .stat-members, .stat-challenges {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+        }
+
+        .stat-value {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #e65100);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .personal-stats {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .personal-stats h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .personal-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .personal-stat {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--light);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .personal-stat:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), #e65100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .stat-info .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-info .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -1100,6 +1402,330 @@
                 gap: 1rem;
             }
         }
+
+        /* Team Selection Modal Styles */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .team-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 3px solid transparent;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-card.selected {
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .team-header {
+            padding: 1.5rem;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .team-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .team-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .team-description {
+            padding: 1.5rem;
+            background-color: var(--white);
+            color: var(--text);
+        }
+
+        .team-description p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .team-description strong {
+            color: var(--primary);
+        }
+
+        .team-selection-footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--light);
+            border-radius: 0 0 15px 15px;
+        }
+
+        /* Achievement Notifications */
+        .achievement-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--accent), #e65100);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 10001;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: all 0.5s ease;
+            max-width: 350px;
+        }
+
+        .achievement-notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .achievement-content h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .achievement-content h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.3rem;
+        }
+
+        .achievement-content p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* User Dashboard Section */
+        .dashboard {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .dashboard-card {
+            background-color: var(--light);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-card h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .progress-item {
+            text-align: center;
+        }
+
+        .progress-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent), #e65100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .progress-number {
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .progress-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .activity-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--white);
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .activity-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .activity-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), #e65100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--white);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .achievement-item.locked {
+            opacity: 0.6;
+        }
+
+        .achievement-item.unlocked {
+            opacity: 1;
+            border-left: 4px solid var(--accent);
+        }
+
+        .achievement-item.unlocked .achievement-icon {
+            animation: bounceIn 0.8s ease;
+        }
+
+        .achievement-icon {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ccc, #999);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .achievement-item.unlocked .achievement-icon {
+            background: linear-gradient(135deg, var(--accent), #e65100);
+        }
+
+        .achievement-info h4 {
+            margin: 0 0 0.25rem 0;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .achievement-info p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .action-btn:active {
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body>
@@ -1118,6 +1744,9 @@
                         <li><a href="#features">Features</a></li>
                         <li><a href="#how-it-works">How It Works</a></li>
                         <li><a href="#challenges">Challenges</a></li>
+                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#leaderboard">Leaderboard</a></li>
+                        <li><a href="#vent-wall">Vent Wall</a></li>
                         <li><a href="#" class="btn">Join Now</a></li>
                     </ul>
                 </nav>
@@ -1281,6 +1910,286 @@
         </div>
     </section>
 
+    <!-- Team Leaderboard Section -->
+    <section class="leaderboard" id="leaderboard">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-trophy"></i> Team Leaderboard</h2>
+                <p>Track your team's progress and see how you're doing!</p>
+            </div>
+
+            <div class="leaderboard-container">
+                <div class="team-stats-grid">
+                    <div class="team-stat-card red-team">
+                        <div class="team-stat-header">
+                            <div class="team-stat-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h3>Red Team</h3>
+                            <div class="team-rank">#1</div>
+                        </div>
+                        <div class="team-stat-body">
+                            <div class="stat-points">
+                                <span class="stat-label">Total Points:</span>
+                                <span class="stat-value">1,247</span>
+                            </div>
+                            <div class="stat-members">
+                                <span class="stat-label">Active Members:</span>
+                                <span class="stat-value">23</span>
+                            </div>
+                            <div class="stat-challenges">
+                                <span class="stat-label">Challenges Completed:</span>
+                                <span class="stat-value">89</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+
+                    <div class="team-stat-card blue-team">
+                        <div class="team-stat-header">
+                            <div class="team-stat-icon">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <h3>Blue Team</h3>
+                            <div class="team-rank">#2</div>
+                        </div>
+                        <div class="team-stat-body">
+                            <div class="stat-points">
+                                <span class="stat-label">Total Points:</span>
+                                <span class="stat-value">1,189</span>
+                            </div>
+                            <div class="stat-members">
+                                <span class="stat-label">Active Members:</span>
+                                <span class="stat-value">21</span>
+                            </div>
+                            <div class="stat-challenges">
+                                <span class="stat-label">Challenges Completed:</span>
+                                <span class="stat-value">82</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 68%"></div>
+                        </div>
+                    </div>
+
+                    <div class="team-stat-card green-team">
+                        <div class="team-stat-header">
+                            <div class="team-stat-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3>Green Team</h3>
+                            <div class="team-rank">#3</div>
+                        </div>
+                        <div class="team-stat-body">
+                            <div class="stat-points">
+                                <span class="stat-label">Total Points:</span>
+                                <span class="stat-value">1,056</span>
+                            </div>
+                            <div class="stat-members">
+                                <span class="stat-label">Active Members:</span>
+                                <span class="stat-value">19</span>
+                            </div>
+                            <div class="stat-challenges">
+                                <span class="stat-label">Challenges Completed:</span>
+                                <span class="stat-value">76</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 58%"></div>
+                        </div>
+                    </div>
+
+                    <div class="team-stat-card yellow-team">
+                        <div class="team-stat-header">
+                            <div class="team-stat-icon">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                            <h3>Yellow Team</h3>
+                            <div class="team-rank">#4</div>
+                        </div>
+                        <div class="team-stat-body">
+                            <div class="stat-points">
+                                <span class="stat-label">Total Points:</span>
+                                <span class="stat-value">987</span>
+                            </div>
+                            <div class="stat-members">
+                                <span class="stat-label">Active Members:</span>
+                                <span class="stat-value">18</span>
+                            </div>
+                            <div class="stat-challenges">
+                                <span class="stat-label">Challenges Completed:</span>
+                                <span class="stat-value">71</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 52%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="personal-stats">
+                    <h3><i class="fas fa-user"></i> Your Progress</h3>
+                    <div class="personal-stats-grid">
+                        <div class="personal-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="personal-points">0</div>
+                                <div class="stat-label">Your Points</div>
+                            </div>
+                        </div>
+                        <div class="personal-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="personal-challenges">0</div>
+                                <div class="stat-label">Challenges Done</div>
+                            </div>
+                        </div>
+                        <div class="personal-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="team-rank">-</div>
+                                <div class="stat-label">Team Rank</div>
+                            </div>
+                        </div>
+                        <div class="personal-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="streak">0</div>
+                                <div class="stat-label">Day Streak</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Dashboard Section -->
+    <section class="dashboard" id="dashboard">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-tachometer-alt"></i> Your Dashboard</h2>
+                <p>Track your progress and see your impact</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Progress Overview -->
+                <div class="dashboard-card progress-overview">
+                    <h3><i class="fas fa-chart-line"></i> Progress Overview</h3>
+                    <div class="progress-stats">
+                        <div class="progress-item">
+                            <div class="progress-circle">
+                                <span class="progress-number" id="completion-rate">0%</span>
+                            </div>
+                            <div class="progress-label">Challenges Completed</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-circle">
+                                <span class="progress-number" id="team-contribution">0%</span>
+                            </div>
+                            <div class="progress-label">Team Contribution</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-circle">
+                                <span class="progress-number" id="support-score">0</span>
+                            </div>
+                            <div class="progress-label">Support Actions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activities -->
+                <div class="dashboard-card recent-activities">
+                    <h3><i class="fas fa-history"></i> Recent Activities</h3>
+                    <div class="activity-list" id="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">🎯</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Welcome to Nova!</div>
+                                <div class="activity-time">Just now</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="dashboard-card achievements">
+                    <h3><i class="fas fa-trophy"></i> Achievements</h3>
+                    <div class="achievements-grid" id="achievements-grid">
+                        <div class="achievement-item locked" data-achievement="firstChallenge">
+                            <div class="achievement-icon">🎯</div>
+                            <div class="achievement-info">
+                                <h4>First Steps</h4>
+                                <p>Complete your first challenge</p>
+                            </div>
+                        </div>
+                        <div class="achievement-item locked" data-achievement="teamPlayer">
+                            <div class="achievement-icon">🤝</div>
+                            <div class="achievement-info">
+                                <h4>Team Player</h4>
+                                <p>Join a team</p>
+                            </div>
+                        </div>
+                        <div class="achievement-item locked" data-achievement="quizMaster">
+                            <div class="achievement-icon">🧠</div>
+                            <div class="achievement-info">
+                                <h4>Quiz Master</h4>
+                                <p>Answer 5 quiz questions correctly</p>
+                            </div>
+                        </div>
+                        <div class="achievement-item locked" data-achievement="ventSupporter">
+                            <div class="achievement-icon">💝</div>
+                            <div class="achievement-info">
+                                <h4>Vent Supporter</h4>
+                                <p>Leave 3 supportive comments</p>
+                            </div>
+                        </div>
+                        <div class="achievement-item locked" data-achievement="pointCollector">
+                            <div class="achievement-icon">⭐</div>
+                            <div class="achievement-info">
+                                <h4>Point Collector</h4>
+                                <p>Earn 100 points</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="dashboard-card quick-actions">
+                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    <div class="action-buttons">
+                        <a href="#challenges" class="action-btn">
+                            <i class="fas fa-play"></i>
+                            Start Challenge
+                        </a>
+                        <a href="#vent-wall" class="action-btn">
+                            <i class="fas fa-comment"></i>
+                            Visit Vent Wall
+                        </a>
+                        <a href="#myth-fact" class="action-btn">
+                            <i class="fas fa-brain"></i>
+                            Take Quiz
+                        </a>
+                        <a href="#leaderboard" class="action-btn">
+                            <i class="fas fa-trophy"></i>
+                            View Leaderboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Vent Wall Section -->
     <section class="vent-wall" id="vent-wall">
         <div class="container">
@@ -1292,6 +2201,24 @@
                 <div class="vent-post">
                     <div class="vent-content">
                         <p>Feeling overwhelmed with exams and everyone seems to be handling it better than me.</p>
+                    </div>
+                    <div class="vent-reactions">
+                        <button class="reaction-btn" data-reaction="heart">
+                            <i class="fas fa-heart"></i>
+                            <span class="reaction-count">12</span>
+                        </button>
+                        <button class="reaction-btn" data-reaction="help">
+                            <i class="fas fa-hands-helping"></i>
+                            <span class="reaction-count">8</span>
+                        </button>
+                        <button class="reaction-btn" data-reaction="strong">
+                            <i class="fas fa-fist-raised"></i>
+                            <span class="reaction-count">5</span>
+                        </button>
+                        <button class="reaction-btn" data-reaction="proud">
+                            <i class="fas fa-trophy"></i>
+                            <span class="reaction-count">0</span>
+                        </button>
                     </div>
                     <div class="vent-comments-section">
                         <div class="vent-comments-header">Comments (2)</div>
@@ -1314,6 +2241,24 @@
                 <div class="vent-post">
                     <div class="vent-content">
                         <p>Someone offered me a vape today and I said no but it was really hard.</p>
+                    </div>
+                    <div class="vent-reactions">
+                        <button class="reaction-btn" data-reaction="heart">
+                            <i class="fas fa-heart"></i>
+                            <span class="reaction-count">25</span>
+                        </button>
+                        <button class="reaction-btn" data-reaction="help">
+                            <i class="fas fa-hands-helping"></i>
+                            <span class="reaction-count">15</span>
+                        </button>
+                        <button class="reaction-btn" data-reaction="strong">
+                            <i class="fas fa-fist-raised"></i>
+                            <span class="reaction-count">10</span>
+                        </button>
+                        <button class="reaction-btn" data-reaction="proud">
+                            <i class="fas fa-trophy"></i>
+                            <span class="reaction-count">20</span>
+                        </button>
                     </div>
                     <div class="vent-comments-section">
                         <div class="vent-comments-header">Comments (3)</div>
@@ -1424,6 +2369,86 @@
         </div>
     </div>
 
+    <!-- Team Selection Modal -->
+    <div id="teamModal" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-users"></i> Choose Your House Team</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+
+            <div class="team-selection-content">
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">
+                    Join one of our four house teams! Each team has unique strengths and you'll earn points together.
+                </p>
+
+                <div class="team-grid">
+                    <div class="team-card" data-team="Red Team" data-color="#f44336">
+                        <div class="team-header" style="background: linear-gradient(135deg, #f44336, #d32f2f);">
+                            <div class="team-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h3>Red Team</h3>
+                        </div>
+                        <div class="team-description">
+                            <p><strong>Strength:</strong> Courage & Leadership</p>
+                            <p><strong>Motto:</strong> "Bold hearts, united spirits"</p>
+                            <p>Perfect for those who lead by example and inspire others to take action.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-card" data-team="Blue Team" data-color="#2196f3">
+                        <div class="team-header" style="background: linear-gradient(135deg, #2196f3, #1976d2);">
+                            <div class="team-icon">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <h3>Blue Team</h3>
+                        </div>
+                        <div class="team-description">
+                            <p><strong>Strength:</strong> Wisdom & Strategy</p>
+                            <p><strong>Motto:</strong> "Calm minds, clear vision"</p>
+                            <p>Ideal for thoughtful problem-solvers who plan ahead and support their peers.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-card" data-team="Green Team" data-color="#4caf50">
+                        <div class="team-header" style="background: linear-gradient(135deg, #4caf50, #388e3c);">
+                            <div class="team-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3>Green Team</h3>
+                        </div>
+                        <div class="team-description">
+                            <p><strong>Strength:</strong> Growth & Harmony</p>
+                            <p><strong>Motto:</strong> "Grow together, heal together"</p>
+                            <p>Great for empathetic souls who focus on personal development and community support.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-card" data-team="Yellow Team" data-color="#ff9800">
+                        <div class="team-header" style="background: linear-gradient(135deg, #ff9800, #f57c00);">
+                            <div class="team-icon">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                            <h3>Yellow Team</h3>
+                        </div>
+                        <div class="team-description">
+                            <p><strong>Strength:</strong> Energy & Creativity</p>
+                            <p><strong>Motto:</strong> "Bright ideas, endless possibilities"</p>
+                            <p>Suited for creative thinkers who bring joy and innovation to every challenge.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-selection-footer">
+                    <p style="text-align: center; color: var(--text-light); font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> You can change teams later, but you'll keep your earned points!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1489,31 +2514,114 @@
         // ===== TEAM SELECTION =====
         function setupTeamSelection() {
             const joinBtn = document.querySelector('.hero .btn');
+            const teamModal = document.getElementById('teamModal');
+            const closeBtn = teamModal.querySelector('.close-btn');
+            let selectedTeam = null;
+
             joinBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                const teams = ['Red Team', 'Blue Team', 'Green Team', 'Yellow Team'];
-                const selectedTeam = prompt('Choose your team:\n1. Red Team\n2. Blue Team\n3. Green Team\n4. Yellow Team\n\nEnter 1-4:', '1');
-                
-                if (selectedTeam && selectedTeam >= 1 && selectedTeam <= 4) {
-                    appState.userTeam = teams[selectedTeam - 1];
-                    alert('Welcome to ' + appState.userTeam + '! Start completing challenges to earn points!');
-                    updateTeamDisplay();
+                if (appState.userTeam) {
+                    alert('You\'re already on ' + appState.userTeam + '! You can change teams by clicking your team name.');
+                    return;
+                }
+                teamModal.style.display = 'block';
+            });
+
+            // Team card selection
+            document.querySelectorAll('.team-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.team-card').forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedTeam = this.getAttribute('data-team');
+
+                    // Add join button if not exists
+                    let joinTeamBtn = teamModal.querySelector('.join-team-btn');
+                    if (!joinTeamBtn) {
+                        joinTeamBtn = document.createElement('button');
+                        joinTeamBtn.className = 'btn join-team-btn';
+                        joinTeamBtn.style.cssText = 'width: 100%; margin-top: 1rem;';
+                        joinTeamBtn.textContent = 'Join ' + selectedTeam;
+                        joinTeamBtn.addEventListener('click', function() {
+                            if (selectedTeam) {
+                                appState.userTeam = selectedTeam;
+                                alert('🎉 Welcome to ' + selectedTeam + '! Start completing challenges to earn points for your team!');
+                                teamModal.style.display = 'none';
+                                updateTeamDisplay();
+                                checkAchievements();
+                                confetti();
+                            }
+                        });
+                        teamModal.querySelector('.team-selection-content').appendChild(joinTeamBtn);
+                    } else {
+                        joinTeamBtn.textContent = 'Join ' + selectedTeam;
+                    }
+                });
+            });
+
+            // Close modal
+            closeBtn.addEventListener('click', function() {
+                teamModal.style.display = 'none';
+                document.querySelectorAll('.team-card').forEach(c => c.classList.remove('selected'));
+                selectedTeam = null;
+                const joinBtn = teamModal.querySelector('.join-team-btn');
+                if (joinBtn) joinBtn.remove();
+            });
+
+            // Close on background click
+            teamModal.addEventListener('click', function(e) {
+                if (e.target === teamModal) {
+                    teamModal.style.display = 'none';
+                    document.querySelectorAll('.team-card').forEach(c => c.classList.remove('selected'));
+                    selectedTeam = null;
+                    const joinBtn = teamModal.querySelector('.join-team-btn');
+                    if (joinBtn) joinBtn.remove();
                 }
             });
         }
 
-        function updateTeamDisplay() {
-            const heroContent = document.querySelector('.hero-content');
-            if (appState.userTeam) {
-                let teamDisplay = heroContent.querySelector('.team-display');
-                if (!teamDisplay) {
-                    teamDisplay = document.createElement('div');
-                    teamDisplay.className = 'team-display';
-                    teamDisplay.style.cssText = 'margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.2); border-radius: 10px; font-size: 1.1rem;';
-                    heroContent.appendChild(teamDisplay);
+        function updatePersonalStats() {
+            document.getElementById('personal-points').textContent = appState.points;
+            document.getElementById('personal-challenges').textContent = appState.completedChallenges.length;
+
+            // Calculate team rank (simplified - in real app this would be from server)
+            const teamRanks = {
+                'Red Team': '#1',
+                'Blue Team': '#2',
+                'Green Team': '#3',
+                'Yellow Team': '#4'
+            };
+            document.getElementById('team-rank').textContent = appState.userTeam ? teamRanks[appState.userTeam] : '-';
+
+            // Simple streak calculation (would be more complex in real app)
+            document.getElementById('streak').textContent = Math.min(appState.completedChallenges.length, 7);
+
+            // Update dashboard
+            updateDashboard();
+        }
+
+        function updateDashboard() {
+            // Update completion rate
+            const completionRate = appState.completedChallenges.length > 0 ? Math.round((appState.completedChallenges.length / 3) * 100) : 0;
+            document.getElementById('completion-rate').textContent = completionRate + '%';
+
+            // Update team contribution (simplified)
+            const teamContribution = appState.userTeam ? Math.round((appState.points / 1247) * 100) : 0;
+            document.getElementById('team-contribution').textContent = teamContribution + '%';
+
+            // Update support score (simplified - would track actual comments/reactions)
+            document.getElementById('support-score').textContent = Math.floor(Math.random() * 10) + 1;
+
+            // Update achievements display
+            Object.keys(achievements).forEach(key => {
+                const achievement = achievements[key];
+                const element = document.querySelector(`[data-achievement="${key}"]`);
+                if (element) {
+                    if (achievement.unlocked) {
+                        element.classList.remove('locked');
+                        element.classList.add('unlocked');
+                    }
                 }
-                teamDisplay.innerHTML = `<strong>${appState.userTeam}</strong> | Points: ${appState.points} <i class="fas fa-star" style="color: var(--accent);"></i>`;
-            }
+            });
         }
 
         // ===== CHALLENGE DATA =====
@@ -1666,6 +2774,8 @@
                 confetti();
                 closeChallengeModal();
                 updateTeamDisplay();
+                updatePersonalStats();
+                checkAchievements();
                 selectedEvidence = null;
                 currentChallengeId = null;
             });
@@ -1910,6 +3020,24 @@
                     <div class="vent-content">
                         <p>${escapeHtml(text)}</p>
                     </div>
+                    <div class="vent-reactions">
+                        <button class="reaction-btn" data-reaction="heart">
+                            <i class="fas fa-heart"></i>
+                            <span class="reaction-count">0</span>
+                        </button>
+                        <button class="reaction-btn" data-reaction="help">
+                            <i class="fas fa-hands-helping"></i>
+                            <span class="reaction-count">0</span>
+                        </button>
+                        <button class="reaction-btn" data-reaction="strong">
+                            <i class="fas fa-fist-raised"></i>
+                            <span class="reaction-count">0</span>
+                        </button>
+                        <button class="reaction-btn" data-reaction="proud">
+                            <i class="fas fa-trophy"></i>
+                            <span class="reaction-count">0</span>
+                        </button>
+                    </div>
                     <div class="vent-comments-section">
                         <div class="vent-comments-header">Comments (0)</div>
                         <div class="vent-comment-input">
@@ -1921,19 +3049,58 @@
 
                 // Add to container before the new-vent section
                 document.querySelector('.vent-container').insertBefore(newPost, document.querySelector('.new-vent'));
-                
-                // Setup comments for new post
+
+                // Setup reactions and comments for new post
+                setupReactions(newPost);
                 setupCommentSection(newPost);
-                
+
                 // Clear textarea
                 textarea.value = '';
-                
+
                 alert('Your post has been shared anonymously!');
             });
 
-            // Setup initial comments
+            // Setup initial posts
             document.querySelectorAll('.vent-post').forEach(post => {
+                setupReactions(post);
                 setupCommentSection(post);
+            });
+        }
+
+        function setupReactions(postElement) {
+            const reactionBtns = postElement.querySelectorAll('.reaction-btn');
+
+            reactionBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const reaction = this.getAttribute('data-reaction');
+                    const countSpan = this.querySelector('.reaction-count');
+                    let currentCount = parseInt(countSpan.textContent);
+
+                    if (this.classList.contains('active')) {
+                        // Remove reaction
+                        this.classList.remove('active');
+                        countSpan.textContent = currentCount - 1;
+                    } else {
+                        // Add reaction
+                        this.classList.add('active');
+                        countSpan.textContent = currentCount + 1;
+
+                        // Add floating animation
+                        const floatingEmoji = document.createElement('div');
+                        floatingEmoji.innerHTML = this.querySelector('i').outerHTML;
+                        floatingEmoji.style.cssText = `
+                            position: fixed;
+                            left: ${this.getBoundingClientRect().left + this.offsetWidth/2 - 10}px;
+                            top: ${this.getBoundingClientRect().top - 10}px;
+                            font-size: 1.5rem;
+                            pointer-events: none;
+                            animation: floatUp 1s ease-out forwards;
+                            z-index: 1000;
+                        `;
+                        document.body.appendChild(floatingEmoji);
+                        setTimeout(() => floatingEmoji.remove(), 1000);
+                    }
+                });
             });
         }
 
@@ -2041,7 +3208,10 @@
             if (answer === quiz.correct) {
                 selectedOption.style.backgroundColor = 'var(--success)';
                 selectedOption.style.color = 'var(--white)';
-                if (appState.userTeam) appState.points += 10;
+                if (appState.userTeam) {
+                    appState.points += 10;
+                    updatePersonalStats();
+                }
             } else {
                 selectedOption.style.backgroundColor = 'var(--danger)';
                 selectedOption.style.color = 'var(--white)';
@@ -2075,7 +3245,65 @@
             document.getElementById('next-quiz-btn').style.display = 'none';
         }
 
-        // ===== UTILITY FUNCTIONS =====
+        // ===== ACHIEVEMENT SYSTEM =====
+        const achievements = {
+            firstChallenge: { title: 'First Steps', description: 'Complete your first challenge!', icon: '🎯', unlocked: false },
+            teamPlayer: { title: 'Team Player', description: 'Join a team!', icon: '🤝', unlocked: false },
+            quizMaster: { title: 'Quiz Master', description: 'Answer 5 quiz questions correctly!', icon: '🧠', unlocked: false },
+            ventSupporter: { title: 'Vent Supporter', description: 'Leave 3 supportive comments!', icon: '💝', unlocked: false },
+            pointCollector: { title: 'Point Collector', description: 'Earn 100 points!', icon: '⭐', unlocked: false }
+        };
+
+        function checkAchievements() {
+            // First challenge
+            if (appState.completedChallenges.length > 0 && !achievements.firstChallenge.unlocked) {
+                unlockAchievement('firstChallenge');
+            }
+
+            // Team player
+            if (appState.userTeam && !achievements.teamPlayer.unlocked) {
+                unlockAchievement('teamPlayer');
+            }
+
+            // Quiz master (simplified - would track correct answers)
+            if (appState.points >= 50 && !achievements.quizMaster.unlocked) {
+                unlockAchievement('quizMaster');
+            }
+
+            // Point collector
+            if (appState.points >= 100 && !achievements.pointCollector.unlocked) {
+                unlockAchievement('pointCollector');
+            }
+        }
+
+        function unlockAchievement(achievementKey) {
+            achievements[achievementKey].unlocked = true;
+            showAchievementNotification(achievements[achievementKey]);
+            showSoundEffect('🏆 Achievement Unlocked!');
+        }
+
+        function showAchievementNotification(achievement) {
+            const notification = document.createElement('div');
+            notification.className = 'achievement-notification';
+            notification.innerHTML = `
+                <div class="achievement-icon">${achievement.icon}</div>
+                <div class="achievement-content">
+                    <h4>Achievement Unlocked!</h4>
+                    <h3>${achievement.title}</h3>
+                    <p>${achievement.description}</p>
+                </div>
+            `;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 500);
+            }, 4000);
+        }
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
@@ -2101,6 +3329,31 @@
                 document.body.appendChild(confetti);
                 setTimeout(() => confetti.remove(), 3000);
             }
+
+            // Play sound effect (visual indicator since we can't play audio)
+            showSoundEffect('🎉 Celebration!');
+        }
+
+        function showSoundEffect(soundText) {
+            const soundIndicator = document.createElement('div');
+            soundIndicator.textContent = soundText;
+            soundIndicator.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 25px;
+                font-weight: bold;
+                font-size: 1.2rem;
+                z-index: 10000;
+                animation: soundPulse 0.5s ease-out;
+                pointer-events: none;
+            `;
+            document.body.appendChild(soundIndicator);
+            setTimeout(() => soundIndicator.remove(), 1000);
         }
 
         // ===== ANIMATIONS =====
@@ -2145,6 +3398,42 @@
             });
         }
 
+        // ===== SCROLL ANIMATIONS =====
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all major sections
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Special bounce animation for feature cards
+            const featureObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('bounce-in');
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.feature-card').forEach(card => {
+                featureObserver.observe(card);
+            });
+        }
+
         // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', function() {
             setupTeamSelection();
@@ -2152,6 +3441,7 @@
             setupVentWall();
             setupQuiz();
             setupMobileMenu();
+            setupScrollAnimations();
             console.log('Nova app initialized successfully!');
         });
     </script>
